@@ -104,6 +104,10 @@
         {
           "type": "SYMBOL",
           "name": "_variable_tag_with_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_return_tag"
         }
       ]
     },
@@ -450,6 +454,36 @@
         }
       ]
     },
+    "_return_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@return"
+          },
+          "named": true,
+          "value": "tag_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_type_name"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "description"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "author_name": {
       "type": "PATTERN",
       "value": "[a-zA-Zα-ωΑ-Ωµ0-9_][ a-zA-Zα-ωΑ-Ωµ0-9_]*"
@@ -492,10 +526,6 @@
         {
           "type": "STRING",
           "value": "@package"
-        },
-        {
-          "type": "STRING",
-          "value": "@return"
         },
         {
           "type": "STRING",

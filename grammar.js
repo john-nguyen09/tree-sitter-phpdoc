@@ -38,6 +38,7 @@ module.exports = grammar({
       $._link_tag,
       $._method_tag,
       $._variable_tag_with_type,
+      $._return_tag,
     ),
 
     _author_tag: $ => seq(
@@ -100,6 +101,12 @@ module.exports = grammar({
       ), $.tag_name),
       $._type_name,
       $.variable_name,
+      optional($.description),
+    ),
+
+    _return_tag: $ => seq(
+      alias('@return', $.tag_name),
+      $._type_name,
       optional($.description),
     ),
 
@@ -178,7 +185,6 @@ function phpdoc_tags() {
     'ignore',
     'license',
     'package',
-    'return',
     'see',
     'since',
     'source',
