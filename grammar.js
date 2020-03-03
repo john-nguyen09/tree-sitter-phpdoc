@@ -114,7 +114,7 @@ module.exports = grammar({
 
     email_address: $ => /\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+/,
   
-    tag_name: $ => choice(...phpdoc_tags_with_at()),
+    tag_name: $ => choice(...phpdoc_tags().map(tag => `@${tag}`)),
   
     description: $ => repeat1($.text_line),
 
@@ -170,10 +170,6 @@ module.exports = grammar({
     _end: $ => '*/',
   },
 })
-
-function phpdoc_tags_with_at() {
-  return phpdoc_tags().map(tag => `@${tag}`);
-}
 
 function phpdoc_tags() {
   return [
