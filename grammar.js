@@ -38,6 +38,7 @@ module.exports = grammar({
       $._method_tag,
       $._return_tag,
       $._see_tag,
+      $._throws_tag,
 
       $._version_tag,
       $._variable_tag_with_type,
@@ -130,6 +131,12 @@ module.exports = grammar({
       optional(alias($.text, $.description))
     ),
 
+    _throws_tag: $ => seq(
+      alias('@throws', $.tag_name),
+      $._type_name,
+      optional($.description),
+    ),
+
     author_name: $ => /[a-zA-Zα-ωΑ-Ωµ0-9_][ a-zA-Zα-ωΑ-Ωµ0-9_]*/,
 
     email_address: $ => /\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+/,
@@ -204,7 +211,6 @@ function phpdoc_tags() {
     'package',
     'source',
     'subpackage',
-    'throws',
     'todo',
     'uses',
     'var',

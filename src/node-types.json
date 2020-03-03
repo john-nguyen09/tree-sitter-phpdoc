@@ -233,10 +233,6 @@
     "named": false
   },
   {
-    "type": "@throws",
-    "named": false
-  },
-  {
     "type": "@todo",
     "named": false
   },
