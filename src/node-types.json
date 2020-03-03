@@ -241,10 +241,6 @@
     "named": false
   },
   {
-    "type": "@var",
-    "named": false
-  },
-  {
     "type": "@version",
     "named": false
   },
