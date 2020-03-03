@@ -39,6 +39,7 @@ module.exports = grammar({
       $._method_tag,
       $._variable_tag_with_type,
       $._return_tag,
+      $._see_tag,
     ),
 
     _author_tag: $ => seq(
@@ -110,6 +111,18 @@ module.exports = grammar({
       optional($.description),
     ),
 
+    _see_tag: $ => seq(
+      alias('@see', $.tag_name),
+      $.uri,
+      $.description,
+    ),
+
+    _see_inline_tag: $ => seq(
+      alias('@see', $.tag_name),
+      $.uri,
+      optional(alias($.text, $.description))
+    ),
+
     author_name: $ => /[a-zA-Zα-ωΑ-Ωµ0-9_][ a-zA-Zα-ωΑ-Ωµ0-9_]*/,
 
     email_address: $ => /\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+/,
@@ -129,7 +142,8 @@ module.exports = grammar({
       '{',
       choice(
         $._internal_inline_tag,
-        $._link_inline_tag
+        $._link_inline_tag,
+        $._see_inline_tag,
       ),
       '}'
     )),
@@ -155,7 +169,7 @@ module.exports = grammar({
       $._name,
       optional('[]')
     ),
-    
+
     _namespace_name: $ => seq($._name, repeat(seq('\\', $._name))),
 
     _namespace_name_as_prefix: $ => choice(
@@ -181,7 +195,6 @@ function phpdoc_tags() {
     'ignore',
     'license',
     'package',
-    'see',
     'since',
     'source',
     'subpackage',

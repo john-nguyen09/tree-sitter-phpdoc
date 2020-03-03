@@ -225,10 +225,6 @@
     "named": false
   },
   {
-    "type": "@see",
-    "named": false
-  },
-  {
     "type": "@since",
     "named": false
   },
