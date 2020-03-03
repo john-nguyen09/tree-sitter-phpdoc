@@ -1,0 +1,30 @@
+{
+  "name": "tree-sitter-phpdoc",
+  "version": "0.0.1",
+  "description": "PHPDoc grammar for tree-sitter",
+  "main": "index.js",
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/john-nguyen09/tree-sitter-phpdoc.git"
+  },
+  "keywords": [
+    "parser",
+    "phpdoc"
+  ],
+  "author": "John Nguyen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/john-nguyen09/tree-sitter-phpdoc/issues"
+  },
+  "homepage": "https://github.com/john-nguyen09/tree-sitter-phpdoc#readme",
+  "devDependencies": {
+    "tree-sitter-cli": "^0.16.4"
+  },
+  "dependencies": {
+    "nan": "^2.14.0"
+  }
+}

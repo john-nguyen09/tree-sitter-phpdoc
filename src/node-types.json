@@ -1,0 +1,258 @@
+[
+  {
+    "type": "description",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "text_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "document",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "description",
+          "named": true
+        },
+        {
+          "type": "tag",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "inline_tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "description",
+          "named": true
+        },
+        {
+          "type": "tag_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "author_name",
+          "named": true
+        },
+        {
+          "type": "description",
+          "named": true
+        },
+        {
+          "type": "email_address",
+          "named": true
+        },
+        {
+          "type": "tag_name",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "uri",
+          "named": true
+        },
+        {
+          "type": "version",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tag_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "text_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "inline_tag",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "\r\n",
+    "named": false
+  },
+  {
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": "@api",
+    "named": false
+  },
+  {
+    "type": "@category",
+    "named": false
+  },
+  {
+    "type": "@copyright",
+    "named": false
+  },
+  {
+    "type": "@example",
+    "named": false
+  },
+  {
+    "type": "@filesource",
+    "named": false
+  },
+  {
+    "type": "@ignore",
+    "named": false
+  },
+  {
+    "type": "@license",
+    "named": false
+  },
+  {
+    "type": "@method",
+    "named": false
+  },
+  {
+    "type": "@package",
+    "named": false
+  },
+  {
+    "type": "@param",
+    "named": false
+  },
+  {
+    "type": "@property",
+    "named": false
+  },
+  {
+    "type": "@property-read",
+    "named": false
+  },
+  {
+    "type": "@property-write",
+    "named": false
+  },
+  {
+    "type": "@return",
+    "named": false
+  },
+  {
+    "type": "@see",
+    "named": false
+  },
+  {
+    "type": "@since",
+    "named": false
+  },
+  {
+    "type": "@source",
+    "named": false
+  },
+  {
+    "type": "@subpackage",
+    "named": false
+  },
+  {
+    "type": "@throws",
+    "named": false
+  },
+  {
+    "type": "@todo",
+    "named": false
+  },
+  {
+    "type": "@uses",
+    "named": false
+  },
+  {
+    "type": "@var",
+    "named": false
+  },
+  {
+    "type": "@version",
+    "named": false
+  },
+  {
+    "type": "author_name",
+    "named": true
+  },
+  {
+    "type": "email_address",
+    "named": true
+  },
+  {
+    "type": "text",
+    "named": true
+  },
+  {
+    "type": "type",
+    "named": true
+  },
+  {
+    "type": "uri",
+    "named": true
+  },
+  {
+    "type": "version",
+    "named": true
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  }
+]

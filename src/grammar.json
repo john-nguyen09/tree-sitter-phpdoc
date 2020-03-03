@@ -1,0 +1,585 @@
+{
+  "name": "phpdoc",
+  "rules": {
+    "document": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_begin"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "description"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "tag"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_end"
+        }
+      ]
+    },
+    "_begin": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "/**"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "STRING",
+              "value": "*"
+            }
+          }
+        ]
+      }
+    },
+    "tag": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "tag_name"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "description"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_author_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_deprecated_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_global_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_internal_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_link_tag"
+        }
+      ]
+    },
+    "_author_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@author"
+          },
+          "named": true,
+          "value": "tag_name"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "author_name"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": "<"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "email_address"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": ">"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_deprecated_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@deprecated"
+          },
+          "named": true,
+          "value": "tag_name"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "version"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "description"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_global_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@global"
+          },
+          "named": true,
+          "value": "tag_name"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          "named": true,
+          "value": "type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "description"
+        }
+      ]
+    },
+    "_internal_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@internal"
+          },
+          "named": true,
+          "value": "tag_name"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "description"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_internal_inline_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@internal"
+          },
+          "named": true,
+          "value": "tag_name"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "text"
+          },
+          "named": true,
+          "value": "description"
+        }
+      ]
+    },
+    "_link_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@link"
+          },
+          "named": true,
+          "value": "tag_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "uri"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "description"
+        }
+      ]
+    },
+    "_link_inline_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@link"
+          },
+          "named": true,
+          "value": "tag_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "uri"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "text"
+          },
+          "named": true,
+          "value": "description"
+        }
+      ]
+    },
+    "author_name": {
+      "type": "PATTERN",
+      "value": "[a-zA-Zα-ωΑ-Ωµ0-9_][ a-zA-Zα-ωΑ-Ωµ0-9_]*"
+    },
+    "email_address": {
+      "type": "PATTERN",
+      "value": "\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+"
+    },
+    "tag_name": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@api"
+        },
+        {
+          "type": "STRING",
+          "value": "@category"
+        },
+        {
+          "type": "STRING",
+          "value": "@copyright"
+        },
+        {
+          "type": "STRING",
+          "value": "@example"
+        },
+        {
+          "type": "STRING",
+          "value": "@filesource"
+        },
+        {
+          "type": "STRING",
+          "value": "@ignore"
+        },
+        {
+          "type": "STRING",
+          "value": "@license"
+        },
+        {
+          "type": "STRING",
+          "value": "@method"
+        },
+        {
+          "type": "STRING",
+          "value": "@package"
+        },
+        {
+          "type": "STRING",
+          "value": "@param"
+        },
+        {
+          "type": "STRING",
+          "value": "@property"
+        },
+        {
+          "type": "STRING",
+          "value": "@property-read"
+        },
+        {
+          "type": "STRING",
+          "value": "@property-write"
+        },
+        {
+          "type": "STRING",
+          "value": "@return"
+        },
+        {
+          "type": "STRING",
+          "value": "@see"
+        },
+        {
+          "type": "STRING",
+          "value": "@since"
+        },
+        {
+          "type": "STRING",
+          "value": "@source"
+        },
+        {
+          "type": "STRING",
+          "value": "@subpackage"
+        },
+        {
+          "type": "STRING",
+          "value": "@throws"
+        },
+        {
+          "type": "STRING",
+          "value": "@todo"
+        },
+        {
+          "type": "STRING",
+          "value": "@uses"
+        },
+        {
+          "type": "STRING",
+          "value": "@var"
+        },
+        {
+          "type": "STRING",
+          "value": "@version"
+        }
+      ]
+    },
+    "description": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "text_line"
+      }
+    },
+    "text_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "text"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "text"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "inline_tag"
+              }
+            ]
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "\n"
+            },
+            {
+              "type": "STRING",
+              "value": "\r\n"
+            }
+          ]
+        }
+      ]
+    },
+    "text": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^@*\\s\\r\\n{}][^\\r\\n{}]*"
+        }
+      }
+    },
+    "inline_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_internal_inline_tag"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "version": {
+      "type": "PATTERN",
+      "value": "[\\.0-9]+"
+    },
+    "uri": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\w+:(\\/?\\/?)[^\\s]+"
+      }
+    },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z_$\\\\][a-zA-Z_$\\\\0-9]*"
+    },
+    "_end": {
+      "type": "STRING",
+      "value": "*/"
+    }
+  },
+  "extras": [
+    {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "(\\r)|(\\r\\n)|(\\n)"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[ \\t]*"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "STRING",
+              "value": "*"
+            }
+          },
+          {
+            "type": "PATTERN",
+            "value": "[ \\t]*"
+          }
+        ]
+      }
+    },
+    {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[ \\t]*"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "STRING",
+              "value": "*"
+            }
+          },
+          {
+            "type": "PATTERN",
+            "value": "[ \\t]*"
+          }
+        ]
+      }
+    },
+    {
+      "type": "TOKEN",
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "STRING",
+          "value": " "
+        }
+      }
+    }
+  ],
+  "conflicts": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}
+
