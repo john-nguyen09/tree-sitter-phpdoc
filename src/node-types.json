@@ -225,10 +225,6 @@
     "named": false
   },
   {
-    "type": "@since",
-    "named": false
-  },
-  {
     "type": "@source",
     "named": false
   },

@@ -32,14 +32,15 @@ module.exports = grammar({
       seq($.tag_name, optional($.description)),
 
       $._author_tag,
-      $._deprecated_tag,
       $._global_tag,
       $._internal_tag,
       $._link_tag,
       $._method_tag,
-      $._variable_tag_with_type,
       $._return_tag,
       $._see_tag,
+
+      $._version_tag,
+      $._variable_tag_with_type,
     ),
 
     _author_tag: $ => seq(
@@ -49,8 +50,14 @@ module.exports = grammar({
       )
     ),
 
-    _deprecated_tag: $ => seq(
-      alias('@deprecated', $.tag_name),
+    _version_tag: $ => seq(
+      alias(
+        choice(
+          '@deprecated',
+          '@since',
+        ),
+        $.tag_name
+      ),
       optional($.version),
       optional($.description),
     ),
@@ -195,7 +202,6 @@ function phpdoc_tags() {
     'ignore',
     'license',
     'package',
-    'since',
     'source',
     'subpackage',
     'throws',

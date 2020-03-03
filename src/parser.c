@@ -22,29 +22,29 @@ enum {
   anon_sym_LT = 4,
   anon_sym_GT = 5,
   anon_sym_ATdeprecated = 6,
-  anon_sym_ATglobal = 7,
-  anon_sym_ATinternal = 8,
-  anon_sym_ATlink = 9,
-  anon_sym_ATmethod = 10,
-  anon_sym_LPAREN = 11,
-  anon_sym_RPAREN = 12,
-  anon_sym_ATparam = 13,
-  anon_sym_ATproperty = 14,
-  anon_sym_ATproperty_DASHread = 15,
-  anon_sym_ATproperty_DASHwrite = 16,
-  anon_sym_ATreturn = 17,
-  anon_sym_ATsee = 18,
-  sym_author_name = 19,
-  sym_email_address = 20,
-  anon_sym_ATapi = 21,
-  anon_sym_ATcategory = 22,
-  anon_sym_ATcopyright = 23,
-  anon_sym_ATexample = 24,
-  anon_sym_ATfilesource = 25,
-  anon_sym_ATignore = 26,
-  anon_sym_ATlicense = 27,
-  anon_sym_ATpackage = 28,
-  anon_sym_ATsince = 29,
+  anon_sym_ATsince = 7,
+  anon_sym_ATglobal = 8,
+  anon_sym_ATinternal = 9,
+  anon_sym_ATlink = 10,
+  anon_sym_ATmethod = 11,
+  anon_sym_LPAREN = 12,
+  anon_sym_RPAREN = 13,
+  anon_sym_ATparam = 14,
+  anon_sym_ATproperty = 15,
+  anon_sym_ATproperty_DASHread = 16,
+  anon_sym_ATproperty_DASHwrite = 17,
+  anon_sym_ATreturn = 18,
+  anon_sym_ATsee = 19,
+  sym_author_name = 20,
+  sym_email_address = 21,
+  anon_sym_ATapi = 22,
+  anon_sym_ATcategory = 23,
+  anon_sym_ATcopyright = 24,
+  anon_sym_ATexample = 25,
+  anon_sym_ATfilesource = 26,
+  anon_sym_ATignore = 27,
+  anon_sym_ATlicense = 28,
+  anon_sym_ATpackage = 29,
   anon_sym_ATsource = 30,
   anon_sym_ATsubpackage = 31,
   anon_sym_ATthrows = 32,
@@ -68,7 +68,7 @@ enum {
   sym_document = 50,
   sym_tag = 51,
   sym__author_tag = 52,
-  sym__deprecated_tag = 53,
+  sym__version_tag = 53,
   sym__global_tag = 54,
   sym__internal_tag = 55,
   sym__internal_inline_tag = 56,
@@ -106,6 +106,7 @@ static const char *ts_symbol_names[] = {
   [anon_sym_LT] = "<",
   [anon_sym_GT] = ">",
   [anon_sym_ATdeprecated] = "tag_name",
+  [anon_sym_ATsince] = "tag_name",
   [anon_sym_ATglobal] = "tag_name",
   [anon_sym_ATinternal] = "tag_name",
   [anon_sym_ATlink] = "tag_name",
@@ -128,7 +129,6 @@ static const char *ts_symbol_names[] = {
   [anon_sym_ATignore] = "@ignore",
   [anon_sym_ATlicense] = "@license",
   [anon_sym_ATpackage] = "@package",
-  [anon_sym_ATsince] = "@since",
   [anon_sym_ATsource] = "@source",
   [anon_sym_ATsubpackage] = "@subpackage",
   [anon_sym_ATthrows] = "@throws",
@@ -152,7 +152,7 @@ static const char *ts_symbol_names[] = {
   [sym_document] = "document",
   [sym_tag] = "tag",
   [sym__author_tag] = "_author_tag",
-  [sym__deprecated_tag] = "_deprecated_tag",
+  [sym__version_tag] = "_version_tag",
   [sym__global_tag] = "_global_tag",
   [sym__internal_tag] = "_internal_tag",
   [sym__internal_inline_tag] = "_internal_inline_tag",
@@ -190,6 +190,7 @@ static TSSymbol ts_symbol_map[] = {
   [anon_sym_LT] = anon_sym_LT,
   [anon_sym_GT] = anon_sym_GT,
   [anon_sym_ATdeprecated] = sym_tag_name,
+  [anon_sym_ATsince] = sym_tag_name,
   [anon_sym_ATglobal] = sym_tag_name,
   [anon_sym_ATinternal] = sym_tag_name,
   [anon_sym_ATlink] = sym_tag_name,
@@ -212,7 +213,6 @@ static TSSymbol ts_symbol_map[] = {
   [anon_sym_ATignore] = anon_sym_ATignore,
   [anon_sym_ATlicense] = anon_sym_ATlicense,
   [anon_sym_ATpackage] = anon_sym_ATpackage,
-  [anon_sym_ATsince] = anon_sym_ATsince,
   [anon_sym_ATsource] = anon_sym_ATsource,
   [anon_sym_ATsubpackage] = anon_sym_ATsubpackage,
   [anon_sym_ATthrows] = anon_sym_ATthrows,
@@ -236,7 +236,7 @@ static TSSymbol ts_symbol_map[] = {
   [sym_document] = sym_document,
   [sym_tag] = sym_tag,
   [sym__author_tag] = sym__author_tag,
-  [sym__deprecated_tag] = sym__deprecated_tag,
+  [sym__version_tag] = sym__version_tag,
   [sym__global_tag] = sym__global_tag,
   [sym__internal_tag] = sym__internal_tag,
   [sym__internal_inline_tag] = sym__internal_inline_tag,
@@ -292,6 +292,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = false,
   },
   [anon_sym_ATdeprecated] = {
+    .visible = true,
+    .named = true,
+  },
+  [anon_sym_ATsince] = {
     .visible = true,
     .named = true,
   },
@@ -380,10 +384,6 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = false,
   },
   [anon_sym_ATpackage] = {
-    .visible = true,
-    .named = false,
-  },
-  [anon_sym_ATsince] = {
     .visible = true,
     .named = false,
   },
@@ -479,7 +479,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = true,
   },
-  [sym__deprecated_tag] = {
+  [sym__version_tag] = {
     .visible = false,
     .named = true,
   },
@@ -623,8 +623,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\r') SKIP(164)
       if (lookahead == ' ') SKIP(0)
       if (lookahead == '$') ADVANCE(216);
-      if (lookahead == '(') ADVANCE(175);
-      if (lookahead == ')') ADVANCE(176);
+      if (lookahead == '(') ADVANCE(176);
+      if (lookahead == ')') ADVANCE(177);
       if (lookahead == '*') ADVANCE(18);
       if (lookahead == '/') ADVANCE(204);
       if (lookahead == '<') ADVANCE(168);
@@ -648,8 +648,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\r') SKIP(1)
       if (lookahead == ' ') SKIP(1)
       if (lookahead == '$') ADVANCE(216);
-      if (lookahead == '(') ADVANCE(175);
-      if (lookahead == ')') ADVANCE(176);
+      if (lookahead == '(') ADVANCE(176);
+      if (lookahead == ')') ADVANCE(177);
       if (lookahead == '*') SKIP(1)
       if (lookahead == '/') ADVANCE(20);
       if (lookahead == '>') ADVANCE(169);
@@ -806,7 +806,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z') ||
           lookahead == 181 ||
           (913 <= lookahead && lookahead <= 937) ||
-          (945 <= lookahead && lookahead <= 969)) ADVANCE(183);
+          (945 <= lookahead && lookahead <= 969)) ADVANCE(184);
       END_STATE();
     case 13:
       if (lookahead == '\t') SKIP(13)
@@ -822,7 +822,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z') ||
           lookahead == 181 ||
           (913 <= lookahead && lookahead <= 937) ||
-          (945 <= lookahead && lookahead <= 969)) ADVANCE(183);
+          (945 <= lookahead && lookahead <= 969)) ADVANCE(184);
       END_STATE();
     case 14:
       if (lookahead == '\t') SKIP(14)
@@ -863,8 +863,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\r') SKIP(17)
       if (lookahead == ' ') SKIP(17)
       if (lookahead == '$') ADVANCE(216);
-      if (lookahead == '(') ADVANCE(175);
-      if (lookahead == ')') ADVANCE(176);
+      if (lookahead == '(') ADVANCE(176);
+      if (lookahead == ')') ADVANCE(177);
       if (lookahead == '*') ADVANCE(18);
       if (lookahead == '/') ADVANCE(204);
       if (lookahead == '<') ADVANCE(168);
@@ -888,8 +888,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\r') SKIP(17)
       if (lookahead == ' ') SKIP(17)
       if (lookahead == '$') ADVANCE(216);
-      if (lookahead == '(') ADVANCE(175);
-      if (lookahead == ')') ADVANCE(176);
+      if (lookahead == '(') ADVANCE(176);
+      if (lookahead == ')') ADVANCE(177);
       if (lookahead == '*') ADVANCE(18);
       if (lookahead == '/') ADVANCE(218);
       if (lookahead == '<') ADVANCE(168);
@@ -927,7 +927,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(185);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(186);
       END_STATE();
     case 23:
       if (lookahead == '/') ADVANCE(210);
@@ -1046,49 +1046,49 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'c') ADVANCE(93);
       END_STATE();
     case 49:
-      if (lookahead == 'd') ADVANCE(174);
+      if (lookahead == 'd') ADVANCE(175);
       END_STATE();
     case 50:
       if (lookahead == 'd') ADVANCE(170);
       END_STATE();
     case 51:
-      if (lookahead == 'd') ADVANCE(179);
+      if (lookahead == 'd') ADVANCE(180);
       END_STATE();
     case 52:
       if (lookahead == 'd') ADVANCE(108);
       END_STATE();
     case 53:
-      if (lookahead == 'e') ADVANCE(182);
+      if (lookahead == 'e') ADVANCE(183);
       END_STATE();
     case 54:
       if (lookahead == 'e') ADVANCE(80);
       END_STATE();
     case 55:
-      if (lookahead == 'e') ADVANCE(194);
+      if (lookahead == 'e') ADVANCE(171);
       END_STATE();
     case 56:
-      if (lookahead == 'e') ADVANCE(191);
+      if (lookahead == 'e') ADVANCE(192);
       END_STATE();
     case 57:
       if (lookahead == 'e') ADVANCE(195);
       END_STATE();
     case 58:
-      if (lookahead == 'e') ADVANCE(189);
+      if (lookahead == 'e') ADVANCE(190);
       END_STATE();
     case 59:
-      if (lookahead == 'e') ADVANCE(192);
-      END_STATE();
-    case 60:
       if (lookahead == 'e') ADVANCE(193);
       END_STATE();
+    case 60:
+      if (lookahead == 'e') ADVANCE(194);
+      END_STATE();
     case 61:
-      if (lookahead == 'e') ADVANCE(190);
+      if (lookahead == 'e') ADVANCE(191);
       END_STATE();
     case 62:
       if (lookahead == 'e') ADVANCE(196);
       END_STATE();
     case 63:
-      if (lookahead == 'e') ADVANCE(180);
+      if (lookahead == 'e') ADVANCE(181);
       END_STATE();
     case 64:
       if (lookahead == 'e') ADVANCE(138);
@@ -1162,7 +1162,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'i') ADVANCE(44);
       END_STATE();
     case 86:
-      if (lookahead == 'i') ADVANCE(186);
+      if (lookahead == 'i') ADVANCE(187);
       END_STATE();
     case 87:
       if (lookahead == 'i') ADVANCE(97);
@@ -1177,7 +1177,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'i') ADVANCE(150);
       END_STATE();
     case 91:
-      if (lookahead == 'k') ADVANCE(173);
+      if (lookahead == 'k') ADVANCE(174);
       END_STATE();
     case 92:
       if (lookahead == 'k') ADVANCE(33);
@@ -1189,10 +1189,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'l') ADVANCE(109);
       END_STATE();
     case 95:
-      if (lookahead == 'l') ADVANCE(171);
+      if (lookahead == 'l') ADVANCE(172);
       END_STATE();
     case 96:
-      if (lookahead == 'l') ADVANCE(172);
+      if (lookahead == 'l') ADVANCE(173);
       END_STATE();
     case 97:
       if (lookahead == 'l') ADVANCE(71);
@@ -1201,7 +1201,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'l') ADVANCE(58);
       END_STATE();
     case 99:
-      if (lookahead == 'm') ADVANCE(177);
+      if (lookahead == 'm') ADVANCE(178);
       END_STATE();
     case 100:
       if (lookahead == 'm') ADVANCE(122);
@@ -1210,7 +1210,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'n') ADVANCE(45);
       END_STATE();
     case 102:
-      if (lookahead == 'n') ADVANCE(181);
+      if (lookahead == 'n') ADVANCE(182);
       END_STATE();
     case 103:
       if (lookahead == 'n') ADVANCE(201);
@@ -1341,7 +1341,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 't') ADVANCE(84);
       END_STATE();
     case 145:
-      if (lookahead == 't') ADVANCE(188);
+      if (lookahead == 't') ADVANCE(189);
       END_STATE();
     case 146:
       if (lookahead == 't') ADVANCE(159);
@@ -1380,10 +1380,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'x') ADVANCE(29);
       END_STATE();
     case 158:
-      if (lookahead == 'y') ADVANCE(187);
+      if (lookahead == 'y') ADVANCE(188);
       END_STATE();
     case 159:
-      if (lookahead == 'y') ADVANCE(178);
+      if (lookahead == 'y') ADVANCE(179);
       END_STATE();
     case 160:
       if (lookahead == 'y') ADVANCE(130);
@@ -1413,8 +1413,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\r') SKIP(164)
       if (lookahead == ' ') SKIP(164)
       if (lookahead == '$') ADVANCE(216);
-      if (lookahead == '(') ADVANCE(175);
-      if (lookahead == ')') ADVANCE(176);
+      if (lookahead == '(') ADVANCE(176);
+      if (lookahead == ')') ADVANCE(177);
       if (lookahead == '*') ADVANCE(18);
       if (lookahead == '/') ADVANCE(204);
       if (lookahead == '<') ADVANCE(168);
@@ -1452,43 +1452,46 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_ATdeprecated);
       END_STATE();
     case 171:
-      ACCEPT_TOKEN(anon_sym_ATglobal);
+      ACCEPT_TOKEN(anon_sym_ATsince);
       END_STATE();
     case 172:
-      ACCEPT_TOKEN(anon_sym_ATinternal);
+      ACCEPT_TOKEN(anon_sym_ATglobal);
       END_STATE();
     case 173:
-      ACCEPT_TOKEN(anon_sym_ATlink);
+      ACCEPT_TOKEN(anon_sym_ATinternal);
       END_STATE();
     case 174:
-      ACCEPT_TOKEN(anon_sym_ATmethod);
+      ACCEPT_TOKEN(anon_sym_ATlink);
       END_STATE();
     case 175:
-      ACCEPT_TOKEN(anon_sym_LPAREN);
+      ACCEPT_TOKEN(anon_sym_ATmethod);
       END_STATE();
     case 176:
-      ACCEPT_TOKEN(anon_sym_RPAREN);
+      ACCEPT_TOKEN(anon_sym_LPAREN);
       END_STATE();
     case 177:
-      ACCEPT_TOKEN(anon_sym_ATparam);
+      ACCEPT_TOKEN(anon_sym_RPAREN);
       END_STATE();
     case 178:
+      ACCEPT_TOKEN(anon_sym_ATparam);
+      END_STATE();
+    case 179:
       ACCEPT_TOKEN(anon_sym_ATproperty);
       if (lookahead == '-') ADVANCE(135);
       END_STATE();
-    case 179:
+    case 180:
       ACCEPT_TOKEN(anon_sym_ATproperty_DASHread);
       END_STATE();
-    case 180:
+    case 181:
       ACCEPT_TOKEN(anon_sym_ATproperty_DASHwrite);
       END_STATE();
-    case 181:
+    case 182:
       ACCEPT_TOKEN(anon_sym_ATreturn);
       END_STATE();
-    case 182:
+    case 183:
       ACCEPT_TOKEN(anon_sym_ATsee);
       END_STATE();
-    case 183:
+    case 184:
       ACCEPT_TOKEN(sym_author_name);
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
@@ -1497,16 +1500,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z') ||
           lookahead == 181 ||
           (913 <= lookahead && lookahead <= 937) ||
-          (945 <= lookahead && lookahead <= 969)) ADVANCE(183);
-      END_STATE();
-    case 184:
-      ACCEPT_TOKEN(sym_email_address);
-      if (lookahead == '-') ADVANCE(161);
-      if (lookahead == '.') ADVANCE(163);
-      if (('0' <= lookahead && lookahead <= '9') ||
-          ('A' <= lookahead && lookahead <= 'Z') ||
-          lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(21);
+          (945 <= lookahead && lookahead <= 969)) ADVANCE(184);
       END_STATE();
     case 185:
       ACCEPT_TOKEN(sym_email_address);
@@ -1515,34 +1509,40 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(184);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(21);
       END_STATE();
     case 186:
-      ACCEPT_TOKEN(anon_sym_ATapi);
+      ACCEPT_TOKEN(sym_email_address);
+      if (lookahead == '-') ADVANCE(161);
+      if (lookahead == '.') ADVANCE(163);
+      if (('0' <= lookahead && lookahead <= '9') ||
+          ('A' <= lookahead && lookahead <= 'Z') ||
+          lookahead == '_' ||
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(185);
       END_STATE();
     case 187:
-      ACCEPT_TOKEN(anon_sym_ATcategory);
+      ACCEPT_TOKEN(anon_sym_ATapi);
       END_STATE();
     case 188:
-      ACCEPT_TOKEN(anon_sym_ATcopyright);
+      ACCEPT_TOKEN(anon_sym_ATcategory);
       END_STATE();
     case 189:
-      ACCEPT_TOKEN(anon_sym_ATexample);
+      ACCEPT_TOKEN(anon_sym_ATcopyright);
       END_STATE();
     case 190:
-      ACCEPT_TOKEN(anon_sym_ATfilesource);
+      ACCEPT_TOKEN(anon_sym_ATexample);
       END_STATE();
     case 191:
-      ACCEPT_TOKEN(anon_sym_ATignore);
+      ACCEPT_TOKEN(anon_sym_ATfilesource);
       END_STATE();
     case 192:
-      ACCEPT_TOKEN(anon_sym_ATlicense);
+      ACCEPT_TOKEN(anon_sym_ATignore);
       END_STATE();
     case 193:
-      ACCEPT_TOKEN(anon_sym_ATpackage);
+      ACCEPT_TOKEN(anon_sym_ATlicense);
       END_STATE();
     case 194:
-      ACCEPT_TOKEN(anon_sym_ATsince);
+      ACCEPT_TOKEN(anon_sym_ATpackage);
       END_STATE();
     case 195:
       ACCEPT_TOKEN(anon_sym_ATsource);
@@ -1862,6 +1862,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_LT] = ACTIONS(1),
     [anon_sym_GT] = ACTIONS(1),
     [anon_sym_ATdeprecated] = ACTIONS(1),
+    [anon_sym_ATsince] = ACTIONS(1),
     [anon_sym_ATglobal] = ACTIONS(1),
     [anon_sym_ATinternal] = ACTIONS(1),
     [anon_sym_ATlink] = ACTIONS(1),
@@ -1882,7 +1883,6 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_ATignore] = ACTIONS(1),
     [anon_sym_ATlicense] = ACTIONS(1),
     [anon_sym_ATpackage] = ACTIONS(1),
-    [anon_sym_ATsince] = ACTIONS(1),
     [anon_sym_ATsource] = ACTIONS(1),
     [anon_sym_ATsubpackage] = ACTIONS(1),
     [anon_sym_ATthrows] = ACTIONS(1),
@@ -1908,7 +1908,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [2] = {
     [sym_tag] = STATE(6),
     [sym__author_tag] = STATE(37),
-    [sym__deprecated_tag] = STATE(37),
+    [sym__version_tag] = STATE(37),
     [sym__global_tag] = STATE(37),
     [sym__internal_tag] = STATE(37),
     [sym__link_tag] = STATE(37),
@@ -1925,6 +1925,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [aux_sym_text_line_repeat1] = STATE(58),
     [anon_sym_ATauthor] = ACTIONS(5),
     [anon_sym_ATdeprecated] = ACTIONS(7),
+    [anon_sym_ATsince] = ACTIONS(7),
     [anon_sym_ATglobal] = ACTIONS(9),
     [anon_sym_ATinternal] = ACTIONS(11),
     [anon_sym_ATlink] = ACTIONS(13),
@@ -1943,7 +1944,6 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_ATignore] = ACTIONS(25),
     [anon_sym_ATlicense] = ACTIONS(25),
     [anon_sym_ATpackage] = ACTIONS(25),
-    [anon_sym_ATsince] = ACTIONS(25),
     [anon_sym_ATsource] = ACTIONS(25),
     [anon_sym_ATsubpackage] = ACTIONS(25),
     [anon_sym_ATthrows] = ACTIONS(25),
@@ -1958,7 +1958,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [3] = {
     [sym_tag] = STATE(5),
     [sym__author_tag] = STATE(37),
-    [sym__deprecated_tag] = STATE(37),
+    [sym__version_tag] = STATE(37),
     [sym__global_tag] = STATE(37),
     [sym__internal_tag] = STATE(37),
     [sym__link_tag] = STATE(37),
@@ -1970,6 +1970,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [aux_sym_document_repeat1] = STATE(5),
     [anon_sym_ATauthor] = ACTIONS(5),
     [anon_sym_ATdeprecated] = ACTIONS(7),
+    [anon_sym_ATsince] = ACTIONS(7),
     [anon_sym_ATglobal] = ACTIONS(9),
     [anon_sym_ATinternal] = ACTIONS(11),
     [anon_sym_ATlink] = ACTIONS(13),
@@ -1988,7 +1989,6 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_ATignore] = ACTIONS(25),
     [anon_sym_ATlicense] = ACTIONS(25),
     [anon_sym_ATpackage] = ACTIONS(25),
-    [anon_sym_ATsince] = ACTIONS(25),
     [anon_sym_ATsource] = ACTIONS(25),
     [anon_sym_ATsubpackage] = ACTIONS(25),
     [anon_sym_ATthrows] = ACTIONS(25),
@@ -2001,7 +2001,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [4] = {
     [sym_tag] = STATE(4),
     [sym__author_tag] = STATE(37),
-    [sym__deprecated_tag] = STATE(37),
+    [sym__version_tag] = STATE(37),
     [sym__global_tag] = STATE(37),
     [sym__internal_tag] = STATE(37),
     [sym__link_tag] = STATE(37),
@@ -2013,6 +2013,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [aux_sym_document_repeat1] = STATE(4),
     [anon_sym_ATauthor] = ACTIONS(35),
     [anon_sym_ATdeprecated] = ACTIONS(38),
+    [anon_sym_ATsince] = ACTIONS(38),
     [anon_sym_ATglobal] = ACTIONS(41),
     [anon_sym_ATinternal] = ACTIONS(44),
     [anon_sym_ATlink] = ACTIONS(47),
@@ -2031,7 +2032,6 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_ATignore] = ACTIONS(65),
     [anon_sym_ATlicense] = ACTIONS(65),
     [anon_sym_ATpackage] = ACTIONS(65),
-    [anon_sym_ATsince] = ACTIONS(65),
     [anon_sym_ATsource] = ACTIONS(65),
     [anon_sym_ATsubpackage] = ACTIONS(65),
     [anon_sym_ATthrows] = ACTIONS(65),
@@ -2044,7 +2044,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [5] = {
     [sym_tag] = STATE(4),
     [sym__author_tag] = STATE(37),
-    [sym__deprecated_tag] = STATE(37),
+    [sym__version_tag] = STATE(37),
     [sym__global_tag] = STATE(37),
     [sym__internal_tag] = STATE(37),
     [sym__link_tag] = STATE(37),
@@ -2056,6 +2056,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [aux_sym_document_repeat1] = STATE(4),
     [anon_sym_ATauthor] = ACTIONS(5),
     [anon_sym_ATdeprecated] = ACTIONS(7),
+    [anon_sym_ATsince] = ACTIONS(7),
     [anon_sym_ATglobal] = ACTIONS(9),
     [anon_sym_ATinternal] = ACTIONS(11),
     [anon_sym_ATlink] = ACTIONS(13),
@@ -2074,7 +2075,6 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_ATignore] = ACTIONS(25),
     [anon_sym_ATlicense] = ACTIONS(25),
     [anon_sym_ATpackage] = ACTIONS(25),
-    [anon_sym_ATsince] = ACTIONS(25),
     [anon_sym_ATsource] = ACTIONS(25),
     [anon_sym_ATsubpackage] = ACTIONS(25),
     [anon_sym_ATthrows] = ACTIONS(25),
@@ -2087,7 +2087,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [6] = {
     [sym_tag] = STATE(4),
     [sym__author_tag] = STATE(37),
-    [sym__deprecated_tag] = STATE(37),
+    [sym__version_tag] = STATE(37),
     [sym__global_tag] = STATE(37),
     [sym__internal_tag] = STATE(37),
     [sym__link_tag] = STATE(37),
@@ -2099,6 +2099,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [aux_sym_document_repeat1] = STATE(4),
     [anon_sym_ATauthor] = ACTIONS(5),
     [anon_sym_ATdeprecated] = ACTIONS(7),
+    [anon_sym_ATsince] = ACTIONS(7),
     [anon_sym_ATglobal] = ACTIONS(9),
     [anon_sym_ATinternal] = ACTIONS(11),
     [anon_sym_ATlink] = ACTIONS(13),
@@ -2117,7 +2118,6 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_ATignore] = ACTIONS(25),
     [anon_sym_ATlicense] = ACTIONS(25),
     [anon_sym_ATpackage] = ACTIONS(25),
-    [anon_sym_ATsince] = ACTIONS(25),
     [anon_sym_ATsource] = ACTIONS(25),
     [anon_sym_ATsubpackage] = ACTIONS(25),
     [anon_sym_ATthrows] = ACTIONS(25),
@@ -2150,6 +2150,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(72), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2167,7 +2168,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2194,6 +2194,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(78), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2211,7 +2212,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2238,6 +2238,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(82), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2255,7 +2256,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2282,6 +2282,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(86), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2299,7 +2300,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2326,6 +2326,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(90), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2343,7 +2344,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2370,6 +2370,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(94), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2387,7 +2388,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2414,6 +2414,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(98), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2431,7 +2432,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2456,6 +2456,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(102), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2473,7 +2474,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2495,6 +2495,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(112), 30,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2512,7 +2513,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2539,6 +2539,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(121), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2556,7 +2557,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2576,6 +2576,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(125), 29,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2593,7 +2594,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2612,6 +2612,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(132), 30,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2629,7 +2630,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2651,6 +2651,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(138), 29,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2668,7 +2669,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2689,6 +2689,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(144), 29,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2706,7 +2707,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2723,6 +2723,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(148), 30,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2740,7 +2741,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2758,6 +2758,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(125), 30,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2775,7 +2776,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2793,6 +2793,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(132), 30,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2810,7 +2811,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2828,6 +2828,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(152), 29,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2845,7 +2846,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2862,6 +2862,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(156), 29,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2879,7 +2880,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2896,6 +2896,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(160), 29,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2913,7 +2914,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2931,6 +2931,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(164), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2948,7 +2949,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2965,6 +2965,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(170), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -2982,7 +2983,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -2997,6 +2997,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(176), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3014,7 +3015,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3029,6 +3029,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(98), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3046,7 +3047,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3061,6 +3061,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(180), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3078,7 +3079,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3093,6 +3093,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(184), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3110,7 +3111,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3125,6 +3125,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(188), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3142,7 +3143,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3157,6 +3157,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(192), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3174,7 +3175,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3189,6 +3189,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(196), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3206,7 +3207,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3221,6 +3221,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(200), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3238,7 +3239,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3253,6 +3253,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(94), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3270,7 +3271,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3285,6 +3285,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(204), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3302,7 +3303,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3317,6 +3317,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(208), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3334,7 +3335,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3349,6 +3349,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(212), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3366,7 +3367,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3381,6 +3381,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(216), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3398,7 +3399,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3413,6 +3413,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(220), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3430,7 +3431,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3445,6 +3445,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(224), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3462,7 +3463,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3477,6 +3477,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(228), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3494,7 +3495,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -3509,6 +3509,7 @@ static uint16_t ts_small_parse_table[] = {
     ACTIONS(232), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
+      anon_sym_ATsince,
       anon_sym_ATglobal,
       anon_sym_ATinternal,
       anon_sym_ATlink,
@@ -3526,7 +3527,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATsince,
       anon_sym_ATsource,
       anon_sym_ATsubpackage,
       anon_sym_ATthrows,
@@ -4207,8 +4207,8 @@ static TSParseActionEntry ts_parse_actions[] = {
   [65] = {.count = 2, .reusable = true}, REDUCE(aux_sym_document_repeat1, 2), SHIFT_REPEAT(26),
   [68] = {.count = 1, .reusable = true}, REDUCE(aux_sym_document_repeat1, 2),
   [70] = {.count = 1, .reusable = true}, SHIFT(108),
-  [72] = {.count = 1, .reusable = true}, REDUCE(sym__deprecated_tag, 1),
-  [74] = {.count = 1, .reusable = false}, REDUCE(sym__deprecated_tag, 1),
+  [72] = {.count = 1, .reusable = true}, REDUCE(sym__version_tag, 1),
+  [74] = {.count = 1, .reusable = false}, REDUCE(sym__version_tag, 1),
   [76] = {.count = 1, .reusable = true}, SHIFT(13),
   [78] = {.count = 1, .reusable = true}, REDUCE(sym__variable_tag_with_type, 3),
   [80] = {.count = 1, .reusable = false}, REDUCE(sym__variable_tag_with_type, 3),
@@ -4220,8 +4220,8 @@ static TSParseActionEntry ts_parse_actions[] = {
   [92] = {.count = 1, .reusable = false}, REDUCE(sym__link_tag, 2),
   [94] = {.count = 1, .reusable = true}, REDUCE(sym_tag, 1),
   [96] = {.count = 1, .reusable = false}, REDUCE(sym_tag, 1),
-  [98] = {.count = 1, .reusable = true}, REDUCE(sym__deprecated_tag, 2),
-  [100] = {.count = 1, .reusable = false}, REDUCE(sym__deprecated_tag, 2),
+  [98] = {.count = 1, .reusable = true}, REDUCE(sym__version_tag, 2),
+  [100] = {.count = 1, .reusable = false}, REDUCE(sym__version_tag, 2),
   [102] = {.count = 1, .reusable = true}, REDUCE(aux_sym_description_repeat1, 2),
   [104] = {.count = 1, .reusable = false}, REDUCE(aux_sym_description_repeat1, 2),
   [106] = {.count = 2, .reusable = false}, REDUCE(aux_sym_description_repeat1, 2), SHIFT_REPEAT(58),
@@ -4277,8 +4277,8 @@ static TSParseActionEntry ts_parse_actions[] = {
   [210] = {.count = 1, .reusable = false}, REDUCE(sym__method_tag, 6, .production_id = 4),
   [212] = {.count = 1, .reusable = true}, REDUCE(sym__author_tag, 5),
   [214] = {.count = 1, .reusable = false}, REDUCE(sym__author_tag, 5),
-  [216] = {.count = 1, .reusable = true}, REDUCE(sym__deprecated_tag, 3),
-  [218] = {.count = 1, .reusable = false}, REDUCE(sym__deprecated_tag, 3),
+  [216] = {.count = 1, .reusable = true}, REDUCE(sym__version_tag, 3),
+  [218] = {.count = 1, .reusable = false}, REDUCE(sym__version_tag, 3),
   [220] = {.count = 1, .reusable = true}, REDUCE(sym__method_tag, 5, .production_id = 4),
   [222] = {.count = 1, .reusable = false}, REDUCE(sym__method_tag, 5, .production_id = 4),
   [224] = {.count = 1, .reusable = true}, REDUCE(sym_tag, 2),

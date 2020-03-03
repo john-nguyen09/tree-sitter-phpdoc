@@ -83,10 +83,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_deprecated_tag"
-        },
-        {
-          "type": "SYMBOL",
           "name": "_global_tag"
         },
         {
@@ -103,15 +99,19 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_variable_tag_with_type"
-        },
-        {
-          "type": "SYMBOL",
           "name": "_return_tag"
         },
         {
           "type": "SYMBOL",
           "name": "_see_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_version_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_variable_tag_with_type"
         }
       ]
     },
@@ -171,14 +171,23 @@
         }
       ]
     },
-    "_deprecated_tag": {
+    "_version_tag": {
       "type": "SEQ",
       "members": [
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "@deprecated"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "@deprecated"
+              },
+              {
+                "type": "STRING",
+                "value": "@since"
+              }
+            ]
           },
           "named": true,
           "value": "tag_name"
@@ -587,10 +596,6 @@
         {
           "type": "STRING",
           "value": "@package"
-        },
-        {
-          "type": "STRING",
-          "value": "@since"
         },
         {
           "type": "STRING",
