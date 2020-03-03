@@ -29,19 +29,19 @@ enum {
   anon_sym_LPAREN = 11,
   anon_sym_RPAREN = 12,
   anon_sym_ATparam = 13,
-  sym_author_name = 14,
-  sym_email_address = 15,
-  anon_sym_ATapi = 16,
-  anon_sym_ATcategory = 17,
-  anon_sym_ATcopyright = 18,
-  anon_sym_ATexample = 19,
-  anon_sym_ATfilesource = 20,
-  anon_sym_ATignore = 21,
-  anon_sym_ATlicense = 22,
-  anon_sym_ATpackage = 23,
-  anon_sym_ATproperty = 24,
-  anon_sym_ATproperty_DASHread = 25,
-  anon_sym_ATproperty_DASHwrite = 26,
+  anon_sym_ATproperty = 14,
+  anon_sym_ATproperty_DASHread = 15,
+  anon_sym_ATproperty_DASHwrite = 16,
+  sym_author_name = 17,
+  sym_email_address = 18,
+  anon_sym_ATapi = 19,
+  anon_sym_ATcategory = 20,
+  anon_sym_ATcopyright = 21,
+  anon_sym_ATexample = 22,
+  anon_sym_ATfilesource = 23,
+  anon_sym_ATignore = 24,
+  anon_sym_ATlicense = 25,
+  anon_sym_ATpackage = 26,
   anon_sym_ATreturn = 27,
   anon_sym_ATsee = 28,
   anon_sym_ATsince = 29,
@@ -75,7 +75,7 @@ enum {
   sym__link_tag = 57,
   sym__link_inline_tag = 58,
   sym__method_tag = 59,
-  sym__param_tag = 60,
+  sym__variable_tag_with_type = 60,
   sym_tag_name = 61,
   sym_description = 62,
   sym_text_line = 63,
@@ -110,6 +110,9 @@ static const char *ts_symbol_names[] = {
   [anon_sym_LPAREN] = "(",
   [anon_sym_RPAREN] = ")",
   [anon_sym_ATparam] = "tag_name",
+  [anon_sym_ATproperty] = "tag_name",
+  [anon_sym_ATproperty_DASHread] = "tag_name",
+  [anon_sym_ATproperty_DASHwrite] = "tag_name",
   [sym_author_name] = "author_name",
   [sym_email_address] = "email_address",
   [anon_sym_ATapi] = "@api",
@@ -120,9 +123,6 @@ static const char *ts_symbol_names[] = {
   [anon_sym_ATignore] = "@ignore",
   [anon_sym_ATlicense] = "@license",
   [anon_sym_ATpackage] = "@package",
-  [anon_sym_ATproperty] = "@property",
-  [anon_sym_ATproperty_DASHread] = "@property-read",
-  [anon_sym_ATproperty_DASHwrite] = "@property-write",
   [anon_sym_ATreturn] = "@return",
   [anon_sym_ATsee] = "@see",
   [anon_sym_ATsince] = "@since",
@@ -156,7 +156,7 @@ static const char *ts_symbol_names[] = {
   [sym__link_tag] = "_link_tag",
   [sym__link_inline_tag] = "_link_inline_tag",
   [sym__method_tag] = "_method_tag",
-  [sym__param_tag] = "_param_tag",
+  [sym__variable_tag_with_type] = "_variable_tag_with_type",
   [sym_tag_name] = "tag_name",
   [sym_description] = "description",
   [sym_text_line] = "text_line",
@@ -191,6 +191,9 @@ static TSSymbol ts_symbol_map[] = {
   [anon_sym_LPAREN] = anon_sym_LPAREN,
   [anon_sym_RPAREN] = anon_sym_RPAREN,
   [anon_sym_ATparam] = sym_tag_name,
+  [anon_sym_ATproperty] = sym_tag_name,
+  [anon_sym_ATproperty_DASHread] = sym_tag_name,
+  [anon_sym_ATproperty_DASHwrite] = sym_tag_name,
   [sym_author_name] = sym_author_name,
   [sym_email_address] = sym_email_address,
   [anon_sym_ATapi] = anon_sym_ATapi,
@@ -201,9 +204,6 @@ static TSSymbol ts_symbol_map[] = {
   [anon_sym_ATignore] = anon_sym_ATignore,
   [anon_sym_ATlicense] = anon_sym_ATlicense,
   [anon_sym_ATpackage] = anon_sym_ATpackage,
-  [anon_sym_ATproperty] = anon_sym_ATproperty,
-  [anon_sym_ATproperty_DASHread] = anon_sym_ATproperty_DASHread,
-  [anon_sym_ATproperty_DASHwrite] = anon_sym_ATproperty_DASHwrite,
   [anon_sym_ATreturn] = anon_sym_ATreturn,
   [anon_sym_ATsee] = anon_sym_ATsee,
   [anon_sym_ATsince] = anon_sym_ATsince,
@@ -237,7 +237,7 @@ static TSSymbol ts_symbol_map[] = {
   [sym__link_tag] = sym__link_tag,
   [sym__link_inline_tag] = sym__link_inline_tag,
   [sym__method_tag] = sym__method_tag,
-  [sym__param_tag] = sym__param_tag,
+  [sym__variable_tag_with_type] = sym__variable_tag_with_type,
   [sym_tag_name] = sym_tag_name,
   [sym_description] = sym_description,
   [sym_text_line] = sym_text_line,
@@ -314,6 +314,18 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
+  [anon_sym_ATproperty] = {
+    .visible = true,
+    .named = true,
+  },
+  [anon_sym_ATproperty_DASHread] = {
+    .visible = true,
+    .named = true,
+  },
+  [anon_sym_ATproperty_DASHwrite] = {
+    .visible = true,
+    .named = true,
+  },
   [sym_author_name] = {
     .visible = true,
     .named = true,
@@ -351,18 +363,6 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = false,
   },
   [anon_sym_ATpackage] = {
-    .visible = true,
-    .named = false,
-  },
-  [anon_sym_ATproperty] = {
-    .visible = true,
-    .named = false,
-  },
-  [anon_sym_ATproperty_DASHread] = {
-    .visible = true,
-    .named = false,
-  },
-  [anon_sym_ATproperty_DASHwrite] = {
     .visible = true,
     .named = false,
   },
@@ -498,7 +498,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = true,
   },
-  [sym__param_tag] = {
+  [sym__variable_tag_with_type] = {
     .visible = false,
     .named = true,
   },
@@ -704,7 +704,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z') ||
           lookahead == 181 ||
           (913 <= lookahead && lookahead <= 937) ||
-          (945 <= lookahead && lookahead <= 969)) ADVANCE(172);
+          (945 <= lookahead && lookahead <= 969)) ADVANCE(175);
       END_STATE();
     case 7:
       if (lookahead == '\t') SKIP(7)
@@ -720,7 +720,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z') ||
           lookahead == 181 ||
           (913 <= lookahead && lookahead <= 937) ||
-          (945 <= lookahead && lookahead <= 969)) ADVANCE(172);
+          (945 <= lookahead && lookahead <= 969)) ADVANCE(175);
       END_STATE();
     case 8:
       if (lookahead == '\t') SKIP(8)
@@ -825,7 +825,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(174);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(177);
       END_STATE();
     case 17:
       if (lookahead == '/') ADVANCE(204);
@@ -950,7 +950,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'd') ADVANCE(164);
       END_STATE();
     case 45:
-      if (lookahead == 'd') ADVANCE(184);
+      if (lookahead == 'd') ADVANCE(173);
       END_STATE();
     case 46:
       if (lookahead == 'd') ADVANCE(102);
@@ -965,28 +965,28 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'e') ADVANCE(188);
       END_STATE();
     case 50:
-      if (lookahead == 'e') ADVANCE(180);
+      if (lookahead == 'e') ADVANCE(183);
       END_STATE();
     case 51:
       if (lookahead == 'e') ADVANCE(189);
       END_STATE();
     case 52:
-      if (lookahead == 'e') ADVANCE(178);
-      END_STATE();
-    case 53:
       if (lookahead == 'e') ADVANCE(181);
       END_STATE();
+    case 53:
+      if (lookahead == 'e') ADVANCE(184);
+      END_STATE();
     case 54:
-      if (lookahead == 'e') ADVANCE(182);
+      if (lookahead == 'e') ADVANCE(185);
       END_STATE();
     case 55:
-      if (lookahead == 'e') ADVANCE(179);
+      if (lookahead == 'e') ADVANCE(182);
       END_STATE();
     case 56:
       if (lookahead == 'e') ADVANCE(190);
       END_STATE();
     case 57:
-      if (lookahead == 'e') ADVANCE(185);
+      if (lookahead == 'e') ADVANCE(174);
       END_STATE();
     case 58:
       if (lookahead == 'e') ADVANCE(132);
@@ -1060,7 +1060,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'i') ADVANCE(38);
       END_STATE();
     case 80:
-      if (lookahead == 'i') ADVANCE(175);
+      if (lookahead == 'i') ADVANCE(178);
       END_STATE();
     case 81:
       if (lookahead == 'i') ADVANCE(91);
@@ -1239,7 +1239,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 't') ADVANCE(78);
       END_STATE();
     case 139:
-      if (lookahead == 't') ADVANCE(177);
+      if (lookahead == 't') ADVANCE(180);
       END_STATE();
     case 140:
       if (lookahead == 't') ADVANCE(153);
@@ -1278,10 +1278,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'x') ADVANCE(23);
       END_STATE();
     case 152:
-      if (lookahead == 'y') ADVANCE(176);
+      if (lookahead == 'y') ADVANCE(179);
       END_STATE();
     case 153:
-      if (lookahead == 'y') ADVANCE(183);
+      if (lookahead == 'y') ADVANCE(172);
       END_STATE();
     case 154:
       if (lookahead == 'y') ADVANCE(124);
@@ -1371,6 +1371,16 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_ATparam);
       END_STATE();
     case 172:
+      ACCEPT_TOKEN(anon_sym_ATproperty);
+      if (lookahead == '-') ADVANCE(129);
+      END_STATE();
+    case 173:
+      ACCEPT_TOKEN(anon_sym_ATproperty_DASHread);
+      END_STATE();
+    case 174:
+      ACCEPT_TOKEN(anon_sym_ATproperty_DASHwrite);
+      END_STATE();
+    case 175:
       ACCEPT_TOKEN(sym_author_name);
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
@@ -1379,9 +1389,9 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z') ||
           lookahead == 181 ||
           (913 <= lookahead && lookahead <= 937) ||
-          (945 <= lookahead && lookahead <= 969)) ADVANCE(172);
+          (945 <= lookahead && lookahead <= 969)) ADVANCE(175);
       END_STATE();
-    case 173:
+    case 176:
       ACCEPT_TOKEN(sym_email_address);
       if (lookahead == '-') ADVANCE(155);
       if (lookahead == '.') ADVANCE(157);
@@ -1390,48 +1400,38 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '_' ||
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(15);
       END_STATE();
-    case 174:
+    case 177:
       ACCEPT_TOKEN(sym_email_address);
       if (lookahead == '-') ADVANCE(155);
       if (lookahead == '.') ADVANCE(157);
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(173);
-      END_STATE();
-    case 175:
-      ACCEPT_TOKEN(anon_sym_ATapi);
-      END_STATE();
-    case 176:
-      ACCEPT_TOKEN(anon_sym_ATcategory);
-      END_STATE();
-    case 177:
-      ACCEPT_TOKEN(anon_sym_ATcopyright);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(176);
       END_STATE();
     case 178:
-      ACCEPT_TOKEN(anon_sym_ATexample);
+      ACCEPT_TOKEN(anon_sym_ATapi);
       END_STATE();
     case 179:
-      ACCEPT_TOKEN(anon_sym_ATfilesource);
+      ACCEPT_TOKEN(anon_sym_ATcategory);
       END_STATE();
     case 180:
-      ACCEPT_TOKEN(anon_sym_ATignore);
+      ACCEPT_TOKEN(anon_sym_ATcopyright);
       END_STATE();
     case 181:
-      ACCEPT_TOKEN(anon_sym_ATlicense);
+      ACCEPT_TOKEN(anon_sym_ATexample);
       END_STATE();
     case 182:
-      ACCEPT_TOKEN(anon_sym_ATpackage);
+      ACCEPT_TOKEN(anon_sym_ATfilesource);
       END_STATE();
     case 183:
-      ACCEPT_TOKEN(anon_sym_ATproperty);
-      if (lookahead == '-') ADVANCE(129);
+      ACCEPT_TOKEN(anon_sym_ATignore);
       END_STATE();
     case 184:
-      ACCEPT_TOKEN(anon_sym_ATproperty_DASHread);
+      ACCEPT_TOKEN(anon_sym_ATlicense);
       END_STATE();
     case 185:
-      ACCEPT_TOKEN(anon_sym_ATproperty_DASHwrite);
+      ACCEPT_TOKEN(anon_sym_ATpackage);
       END_STATE();
     case 186:
       ACCEPT_TOKEN(anon_sym_ATreturn);
@@ -1748,6 +1748,9 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_LPAREN] = ACTIONS(1),
     [anon_sym_RPAREN] = ACTIONS(1),
     [anon_sym_ATparam] = ACTIONS(1),
+    [anon_sym_ATproperty] = ACTIONS(1),
+    [anon_sym_ATproperty_DASHread] = ACTIONS(1),
+    [anon_sym_ATproperty_DASHwrite] = ACTIONS(1),
     [anon_sym_ATapi] = ACTIONS(1),
     [anon_sym_ATcategory] = ACTIONS(1),
     [anon_sym_ATcopyright] = ACTIONS(1),
@@ -1756,9 +1759,6 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_ATignore] = ACTIONS(1),
     [anon_sym_ATlicense] = ACTIONS(1),
     [anon_sym_ATpackage] = ACTIONS(1),
-    [anon_sym_ATproperty] = ACTIONS(1),
-    [anon_sym_ATproperty_DASHread] = ACTIONS(1),
-    [anon_sym_ATproperty_DASHwrite] = ACTIONS(1),
     [anon_sym_ATreturn] = ACTIONS(1),
     [anon_sym_ATsee] = ACTIONS(1),
     [anon_sym_ATsince] = ACTIONS(1),
@@ -1792,7 +1792,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym__internal_tag] = STATE(20),
     [sym__link_tag] = STATE(20),
     [sym__method_tag] = STATE(20),
-    [sym__param_tag] = STATE(20),
+    [sym__variable_tag_with_type] = STATE(20),
     [sym_tag_name] = STATE(8),
     [sym_description] = STATE(3),
     [sym_text_line] = STATE(13),
@@ -1807,27 +1807,27 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_ATlink] = ACTIONS(13),
     [anon_sym_ATmethod] = ACTIONS(15),
     [anon_sym_ATparam] = ACTIONS(17),
-    [anon_sym_ATapi] = ACTIONS(19),
-    [anon_sym_ATcategory] = ACTIONS(19),
-    [anon_sym_ATcopyright] = ACTIONS(19),
-    [anon_sym_ATexample] = ACTIONS(19),
-    [anon_sym_ATfilesource] = ACTIONS(19),
-    [anon_sym_ATignore] = ACTIONS(19),
-    [anon_sym_ATlicense] = ACTIONS(19),
-    [anon_sym_ATpackage] = ACTIONS(19),
-    [anon_sym_ATproperty] = ACTIONS(21),
-    [anon_sym_ATproperty_DASHread] = ACTIONS(19),
-    [anon_sym_ATproperty_DASHwrite] = ACTIONS(19),
-    [anon_sym_ATreturn] = ACTIONS(19),
-    [anon_sym_ATsee] = ACTIONS(19),
-    [anon_sym_ATsince] = ACTIONS(19),
-    [anon_sym_ATsource] = ACTIONS(19),
-    [anon_sym_ATsubpackage] = ACTIONS(19),
-    [anon_sym_ATthrows] = ACTIONS(19),
-    [anon_sym_ATtodo] = ACTIONS(19),
-    [anon_sym_ATuses] = ACTIONS(19),
-    [anon_sym_ATvar] = ACTIONS(19),
-    [anon_sym_ATversion] = ACTIONS(19),
+    [anon_sym_ATproperty] = ACTIONS(19),
+    [anon_sym_ATproperty_DASHread] = ACTIONS(17),
+    [anon_sym_ATproperty_DASHwrite] = ACTIONS(17),
+    [anon_sym_ATapi] = ACTIONS(21),
+    [anon_sym_ATcategory] = ACTIONS(21),
+    [anon_sym_ATcopyright] = ACTIONS(21),
+    [anon_sym_ATexample] = ACTIONS(21),
+    [anon_sym_ATfilesource] = ACTIONS(21),
+    [anon_sym_ATignore] = ACTIONS(21),
+    [anon_sym_ATlicense] = ACTIONS(21),
+    [anon_sym_ATpackage] = ACTIONS(21),
+    [anon_sym_ATreturn] = ACTIONS(21),
+    [anon_sym_ATsee] = ACTIONS(21),
+    [anon_sym_ATsince] = ACTIONS(21),
+    [anon_sym_ATsource] = ACTIONS(21),
+    [anon_sym_ATsubpackage] = ACTIONS(21),
+    [anon_sym_ATthrows] = ACTIONS(21),
+    [anon_sym_ATtodo] = ACTIONS(21),
+    [anon_sym_ATuses] = ACTIONS(21),
+    [anon_sym_ATvar] = ACTIONS(21),
+    [anon_sym_ATversion] = ACTIONS(21),
     [sym_text] = ACTIONS(23),
     [anon_sym_LBRACE] = ACTIONS(25),
     [sym__end] = ACTIONS(27),
@@ -1840,7 +1840,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym__internal_tag] = STATE(20),
     [sym__link_tag] = STATE(20),
     [sym__method_tag] = STATE(20),
-    [sym__param_tag] = STATE(20),
+    [sym__variable_tag_with_type] = STATE(20),
     [sym_tag_name] = STATE(8),
     [aux_sym_document_repeat1] = STATE(4),
     [anon_sym_ATauthor] = ACTIONS(5),
@@ -1850,27 +1850,27 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_ATlink] = ACTIONS(13),
     [anon_sym_ATmethod] = ACTIONS(15),
     [anon_sym_ATparam] = ACTIONS(17),
-    [anon_sym_ATapi] = ACTIONS(19),
-    [anon_sym_ATcategory] = ACTIONS(19),
-    [anon_sym_ATcopyright] = ACTIONS(19),
-    [anon_sym_ATexample] = ACTIONS(19),
-    [anon_sym_ATfilesource] = ACTIONS(19),
-    [anon_sym_ATignore] = ACTIONS(19),
-    [anon_sym_ATlicense] = ACTIONS(19),
-    [anon_sym_ATpackage] = ACTIONS(19),
-    [anon_sym_ATproperty] = ACTIONS(21),
-    [anon_sym_ATproperty_DASHread] = ACTIONS(19),
-    [anon_sym_ATproperty_DASHwrite] = ACTIONS(19),
-    [anon_sym_ATreturn] = ACTIONS(19),
-    [anon_sym_ATsee] = ACTIONS(19),
-    [anon_sym_ATsince] = ACTIONS(19),
-    [anon_sym_ATsource] = ACTIONS(19),
-    [anon_sym_ATsubpackage] = ACTIONS(19),
-    [anon_sym_ATthrows] = ACTIONS(19),
-    [anon_sym_ATtodo] = ACTIONS(19),
-    [anon_sym_ATuses] = ACTIONS(19),
-    [anon_sym_ATvar] = ACTIONS(19),
-    [anon_sym_ATversion] = ACTIONS(19),
+    [anon_sym_ATproperty] = ACTIONS(19),
+    [anon_sym_ATproperty_DASHread] = ACTIONS(17),
+    [anon_sym_ATproperty_DASHwrite] = ACTIONS(17),
+    [anon_sym_ATapi] = ACTIONS(21),
+    [anon_sym_ATcategory] = ACTIONS(21),
+    [anon_sym_ATcopyright] = ACTIONS(21),
+    [anon_sym_ATexample] = ACTIONS(21),
+    [anon_sym_ATfilesource] = ACTIONS(21),
+    [anon_sym_ATignore] = ACTIONS(21),
+    [anon_sym_ATlicense] = ACTIONS(21),
+    [anon_sym_ATpackage] = ACTIONS(21),
+    [anon_sym_ATreturn] = ACTIONS(21),
+    [anon_sym_ATsee] = ACTIONS(21),
+    [anon_sym_ATsince] = ACTIONS(21),
+    [anon_sym_ATsource] = ACTIONS(21),
+    [anon_sym_ATsubpackage] = ACTIONS(21),
+    [anon_sym_ATthrows] = ACTIONS(21),
+    [anon_sym_ATtodo] = ACTIONS(21),
+    [anon_sym_ATuses] = ACTIONS(21),
+    [anon_sym_ATvar] = ACTIONS(21),
+    [anon_sym_ATversion] = ACTIONS(21),
     [sym__end] = ACTIONS(29),
   },
   [4] = {
@@ -1881,7 +1881,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym__internal_tag] = STATE(20),
     [sym__link_tag] = STATE(20),
     [sym__method_tag] = STATE(20),
-    [sym__param_tag] = STATE(20),
+    [sym__variable_tag_with_type] = STATE(20),
     [sym_tag_name] = STATE(8),
     [aux_sym_document_repeat1] = STATE(5),
     [anon_sym_ATauthor] = ACTIONS(5),
@@ -1891,27 +1891,27 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_ATlink] = ACTIONS(13),
     [anon_sym_ATmethod] = ACTIONS(15),
     [anon_sym_ATparam] = ACTIONS(17),
-    [anon_sym_ATapi] = ACTIONS(19),
-    [anon_sym_ATcategory] = ACTIONS(19),
-    [anon_sym_ATcopyright] = ACTIONS(19),
-    [anon_sym_ATexample] = ACTIONS(19),
-    [anon_sym_ATfilesource] = ACTIONS(19),
-    [anon_sym_ATignore] = ACTIONS(19),
-    [anon_sym_ATlicense] = ACTIONS(19),
-    [anon_sym_ATpackage] = ACTIONS(19),
-    [anon_sym_ATproperty] = ACTIONS(21),
-    [anon_sym_ATproperty_DASHread] = ACTIONS(19),
-    [anon_sym_ATproperty_DASHwrite] = ACTIONS(19),
-    [anon_sym_ATreturn] = ACTIONS(19),
-    [anon_sym_ATsee] = ACTIONS(19),
-    [anon_sym_ATsince] = ACTIONS(19),
-    [anon_sym_ATsource] = ACTIONS(19),
-    [anon_sym_ATsubpackage] = ACTIONS(19),
-    [anon_sym_ATthrows] = ACTIONS(19),
-    [anon_sym_ATtodo] = ACTIONS(19),
-    [anon_sym_ATuses] = ACTIONS(19),
-    [anon_sym_ATvar] = ACTIONS(19),
-    [anon_sym_ATversion] = ACTIONS(19),
+    [anon_sym_ATproperty] = ACTIONS(19),
+    [anon_sym_ATproperty_DASHread] = ACTIONS(17),
+    [anon_sym_ATproperty_DASHwrite] = ACTIONS(17),
+    [anon_sym_ATapi] = ACTIONS(21),
+    [anon_sym_ATcategory] = ACTIONS(21),
+    [anon_sym_ATcopyright] = ACTIONS(21),
+    [anon_sym_ATexample] = ACTIONS(21),
+    [anon_sym_ATfilesource] = ACTIONS(21),
+    [anon_sym_ATignore] = ACTIONS(21),
+    [anon_sym_ATlicense] = ACTIONS(21),
+    [anon_sym_ATpackage] = ACTIONS(21),
+    [anon_sym_ATreturn] = ACTIONS(21),
+    [anon_sym_ATsee] = ACTIONS(21),
+    [anon_sym_ATsince] = ACTIONS(21),
+    [anon_sym_ATsource] = ACTIONS(21),
+    [anon_sym_ATsubpackage] = ACTIONS(21),
+    [anon_sym_ATthrows] = ACTIONS(21),
+    [anon_sym_ATtodo] = ACTIONS(21),
+    [anon_sym_ATuses] = ACTIONS(21),
+    [anon_sym_ATvar] = ACTIONS(21),
+    [anon_sym_ATversion] = ACTIONS(21),
     [sym__end] = ACTIONS(31),
   },
   [5] = {
@@ -1922,7 +1922,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym__internal_tag] = STATE(20),
     [sym__link_tag] = STATE(20),
     [sym__method_tag] = STATE(20),
-    [sym__param_tag] = STATE(20),
+    [sym__variable_tag_with_type] = STATE(20),
     [sym_tag_name] = STATE(8),
     [aux_sym_document_repeat1] = STATE(5),
     [anon_sym_ATauthor] = ACTIONS(33),
@@ -1932,27 +1932,27 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_ATlink] = ACTIONS(45),
     [anon_sym_ATmethod] = ACTIONS(48),
     [anon_sym_ATparam] = ACTIONS(51),
-    [anon_sym_ATapi] = ACTIONS(54),
-    [anon_sym_ATcategory] = ACTIONS(54),
-    [anon_sym_ATcopyright] = ACTIONS(54),
-    [anon_sym_ATexample] = ACTIONS(54),
-    [anon_sym_ATfilesource] = ACTIONS(54),
-    [anon_sym_ATignore] = ACTIONS(54),
-    [anon_sym_ATlicense] = ACTIONS(54),
-    [anon_sym_ATpackage] = ACTIONS(54),
-    [anon_sym_ATproperty] = ACTIONS(57),
-    [anon_sym_ATproperty_DASHread] = ACTIONS(54),
-    [anon_sym_ATproperty_DASHwrite] = ACTIONS(54),
-    [anon_sym_ATreturn] = ACTIONS(54),
-    [anon_sym_ATsee] = ACTIONS(54),
-    [anon_sym_ATsince] = ACTIONS(54),
-    [anon_sym_ATsource] = ACTIONS(54),
-    [anon_sym_ATsubpackage] = ACTIONS(54),
-    [anon_sym_ATthrows] = ACTIONS(54),
-    [anon_sym_ATtodo] = ACTIONS(54),
-    [anon_sym_ATuses] = ACTIONS(54),
-    [anon_sym_ATvar] = ACTIONS(54),
-    [anon_sym_ATversion] = ACTIONS(54),
+    [anon_sym_ATproperty] = ACTIONS(54),
+    [anon_sym_ATproperty_DASHread] = ACTIONS(51),
+    [anon_sym_ATproperty_DASHwrite] = ACTIONS(51),
+    [anon_sym_ATapi] = ACTIONS(57),
+    [anon_sym_ATcategory] = ACTIONS(57),
+    [anon_sym_ATcopyright] = ACTIONS(57),
+    [anon_sym_ATexample] = ACTIONS(57),
+    [anon_sym_ATfilesource] = ACTIONS(57),
+    [anon_sym_ATignore] = ACTIONS(57),
+    [anon_sym_ATlicense] = ACTIONS(57),
+    [anon_sym_ATpackage] = ACTIONS(57),
+    [anon_sym_ATreturn] = ACTIONS(57),
+    [anon_sym_ATsee] = ACTIONS(57),
+    [anon_sym_ATsince] = ACTIONS(57),
+    [anon_sym_ATsource] = ACTIONS(57),
+    [anon_sym_ATsubpackage] = ACTIONS(57),
+    [anon_sym_ATthrows] = ACTIONS(57),
+    [anon_sym_ATtodo] = ACTIONS(57),
+    [anon_sym_ATuses] = ACTIONS(57),
+    [anon_sym_ATvar] = ACTIONS(57),
+    [anon_sym_ATversion] = ACTIONS(57),
     [sym__end] = ACTIONS(60),
   },
   [6] = {
@@ -1963,7 +1963,7 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym__internal_tag] = STATE(20),
     [sym__link_tag] = STATE(20),
     [sym__method_tag] = STATE(20),
-    [sym__param_tag] = STATE(20),
+    [sym__variable_tag_with_type] = STATE(20),
     [sym_tag_name] = STATE(8),
     [aux_sym_document_repeat1] = STATE(5),
     [anon_sym_ATauthor] = ACTIONS(5),
@@ -1973,27 +1973,27 @@ static uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_ATlink] = ACTIONS(13),
     [anon_sym_ATmethod] = ACTIONS(15),
     [anon_sym_ATparam] = ACTIONS(17),
-    [anon_sym_ATapi] = ACTIONS(19),
-    [anon_sym_ATcategory] = ACTIONS(19),
-    [anon_sym_ATcopyright] = ACTIONS(19),
-    [anon_sym_ATexample] = ACTIONS(19),
-    [anon_sym_ATfilesource] = ACTIONS(19),
-    [anon_sym_ATignore] = ACTIONS(19),
-    [anon_sym_ATlicense] = ACTIONS(19),
-    [anon_sym_ATpackage] = ACTIONS(19),
-    [anon_sym_ATproperty] = ACTIONS(21),
-    [anon_sym_ATproperty_DASHread] = ACTIONS(19),
-    [anon_sym_ATproperty_DASHwrite] = ACTIONS(19),
-    [anon_sym_ATreturn] = ACTIONS(19),
-    [anon_sym_ATsee] = ACTIONS(19),
-    [anon_sym_ATsince] = ACTIONS(19),
-    [anon_sym_ATsource] = ACTIONS(19),
-    [anon_sym_ATsubpackage] = ACTIONS(19),
-    [anon_sym_ATthrows] = ACTIONS(19),
-    [anon_sym_ATtodo] = ACTIONS(19),
-    [anon_sym_ATuses] = ACTIONS(19),
-    [anon_sym_ATvar] = ACTIONS(19),
-    [anon_sym_ATversion] = ACTIONS(19),
+    [anon_sym_ATproperty] = ACTIONS(19),
+    [anon_sym_ATproperty_DASHread] = ACTIONS(17),
+    [anon_sym_ATproperty_DASHwrite] = ACTIONS(17),
+    [anon_sym_ATapi] = ACTIONS(21),
+    [anon_sym_ATcategory] = ACTIONS(21),
+    [anon_sym_ATcopyright] = ACTIONS(21),
+    [anon_sym_ATexample] = ACTIONS(21),
+    [anon_sym_ATfilesource] = ACTIONS(21),
+    [anon_sym_ATignore] = ACTIONS(21),
+    [anon_sym_ATlicense] = ACTIONS(21),
+    [anon_sym_ATpackage] = ACTIONS(21),
+    [anon_sym_ATreturn] = ACTIONS(21),
+    [anon_sym_ATsee] = ACTIONS(21),
+    [anon_sym_ATsince] = ACTIONS(21),
+    [anon_sym_ATsource] = ACTIONS(21),
+    [anon_sym_ATsubpackage] = ACTIONS(21),
+    [anon_sym_ATthrows] = ACTIONS(21),
+    [anon_sym_ATtodo] = ACTIONS(21),
+    [anon_sym_ATuses] = ACTIONS(21),
+    [anon_sym_ATvar] = ACTIONS(21),
+    [anon_sym_ATversion] = ACTIONS(21),
     [sym__end] = ACTIONS(29),
   },
 };
@@ -2024,6 +2024,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2032,8 +2034,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2068,6 +2068,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2076,8 +2078,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2112,6 +2112,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2120,8 +2122,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2156,6 +2156,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2164,8 +2166,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2200,6 +2200,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2208,8 +2210,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2244,6 +2244,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2252,8 +2254,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2286,6 +2286,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2294,8 +2296,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2328,6 +2328,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2336,8 +2338,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2361,6 +2361,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2369,8 +2371,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2395,6 +2395,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2403,8 +2405,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2429,6 +2429,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2437,8 +2439,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2464,6 +2464,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2472,8 +2474,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2487,9 +2487,9 @@ static uint16_t ts_small_parse_table[] = {
       sym__end,
   [550] = 3,
     ACTIONS(122), 1,
-      sym_author_name,
-    ACTIONS(124), 1,
       anon_sym_ATproperty,
+    ACTIONS(124), 1,
+      sym_author_name,
     ACTIONS(120), 28,
       anon_sym_ATauthor,
       anon_sym_ATdeprecated,
@@ -2498,6 +2498,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2506,8 +2508,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2530,6 +2530,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2538,8 +2540,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2562,6 +2562,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2570,8 +2572,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2594,6 +2594,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2602,8 +2604,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2626,6 +2626,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2634,8 +2636,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2658,6 +2658,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2666,8 +2668,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2690,6 +2690,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2698,8 +2700,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2722,6 +2722,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2730,8 +2732,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2754,6 +2754,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2762,8 +2764,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2786,6 +2786,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2794,8 +2796,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2818,6 +2818,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2826,8 +2828,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2850,6 +2850,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2858,8 +2860,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2882,6 +2882,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2890,8 +2892,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2914,6 +2914,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2922,8 +2924,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2946,6 +2946,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2954,8 +2956,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -2978,6 +2978,8 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATlink,
       anon_sym_ATmethod,
       anon_sym_ATparam,
+      anon_sym_ATproperty_DASHread,
+      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATapi,
       anon_sym_ATcategory,
       anon_sym_ATcopyright,
@@ -2986,8 +2988,6 @@ static uint16_t ts_small_parse_table[] = {
       anon_sym_ATignore,
       anon_sym_ATlicense,
       anon_sym_ATpackage,
-      anon_sym_ATproperty_DASHread,
-      anon_sym_ATproperty_DASHwrite,
       anon_sym_ATreturn,
       anon_sym_ATsee,
       anon_sym_ATsince,
@@ -3574,8 +3574,8 @@ static TSParseActionEntry ts_parse_actions[] = {
   [13] = {.count = 1, .reusable = true}, SHIFT(95),
   [15] = {.count = 1, .reusable = true}, SHIFT(42),
   [17] = {.count = 1, .reusable = true}, SHIFT(50),
-  [19] = {.count = 1, .reusable = true}, SHIFT(15),
-  [21] = {.count = 1, .reusable = false}, SHIFT(15),
+  [19] = {.count = 1, .reusable = false}, SHIFT(50),
+  [21] = {.count = 1, .reusable = true}, SHIFT(15),
   [23] = {.count = 1, .reusable = false}, SHIFT(49),
   [25] = {.count = 1, .reusable = true}, SHIFT(53),
   [27] = {.count = 1, .reusable = true}, SHIFT(94),
@@ -3588,8 +3588,8 @@ static TSParseActionEntry ts_parse_actions[] = {
   [45] = {.count = 2, .reusable = true}, REDUCE(aux_sym_document_repeat1, 2), SHIFT_REPEAT(95),
   [48] = {.count = 2, .reusable = true}, REDUCE(aux_sym_document_repeat1, 2), SHIFT_REPEAT(42),
   [51] = {.count = 2, .reusable = true}, REDUCE(aux_sym_document_repeat1, 2), SHIFT_REPEAT(50),
-  [54] = {.count = 2, .reusable = true}, REDUCE(aux_sym_document_repeat1, 2), SHIFT_REPEAT(15),
-  [57] = {.count = 2, .reusable = false}, REDUCE(aux_sym_document_repeat1, 2), SHIFT_REPEAT(15),
+  [54] = {.count = 2, .reusable = false}, REDUCE(aux_sym_document_repeat1, 2), SHIFT_REPEAT(50),
+  [57] = {.count = 2, .reusable = true}, REDUCE(aux_sym_document_repeat1, 2), SHIFT_REPEAT(15),
   [60] = {.count = 1, .reusable = true}, REDUCE(aux_sym_document_repeat1, 2),
   [62] = {.count = 1, .reusable = true}, REDUCE(sym__deprecated_tag, 1),
   [64] = {.count = 1, .reusable = false}, REDUCE(sym__deprecated_tag, 1),
@@ -3602,8 +3602,8 @@ static TSParseActionEntry ts_parse_actions[] = {
   [78] = {.count = 1, .reusable = false}, REDUCE(sym__link_tag, 2),
   [80] = {.count = 1, .reusable = true}, REDUCE(sym__deprecated_tag, 2),
   [82] = {.count = 1, .reusable = false}, REDUCE(sym__deprecated_tag, 2),
-  [84] = {.count = 1, .reusable = true}, REDUCE(sym__param_tag, 3),
-  [86] = {.count = 1, .reusable = false}, REDUCE(sym__param_tag, 3),
+  [84] = {.count = 1, .reusable = true}, REDUCE(sym__variable_tag_with_type, 3),
+  [86] = {.count = 1, .reusable = false}, REDUCE(sym__variable_tag_with_type, 3),
   [88] = {.count = 1, .reusable = true}, REDUCE(sym_description, 1),
   [90] = {.count = 1, .reusable = false}, REDUCE(sym_description, 1),
   [92] = {.count = 1, .reusable = true}, REDUCE(aux_sym_description_repeat1, 2),
@@ -3620,8 +3620,8 @@ static TSParseActionEntry ts_parse_actions[] = {
   [116] = {.count = 1, .reusable = true}, SHIFT(84),
   [118] = {.count = 1, .reusable = false}, REDUCE(sym__author_tag, 2),
   [120] = {.count = 1, .reusable = true}, REDUCE(sym__author_tag, 1),
-  [122] = {.count = 1, .reusable = true}, SHIFT(18),
-  [124] = {.count = 1, .reusable = false}, REDUCE(sym__author_tag, 1),
+  [122] = {.count = 1, .reusable = false}, REDUCE(sym__author_tag, 1),
+  [124] = {.count = 1, .reusable = true}, SHIFT(18),
   [126] = {.count = 1, .reusable = true}, REDUCE(sym_tag, 2),
   [128] = {.count = 1, .reusable = false}, REDUCE(sym_tag, 2),
   [130] = {.count = 1, .reusable = true}, REDUCE(sym__author_tag, 5),
@@ -3642,8 +3642,8 @@ static TSParseActionEntry ts_parse_actions[] = {
   [160] = {.count = 1, .reusable = false}, REDUCE(sym__link_tag, 3),
   [162] = {.count = 1, .reusable = true}, REDUCE(sym__method_tag, 7, .production_id = 5),
   [164] = {.count = 1, .reusable = false}, REDUCE(sym__method_tag, 7, .production_id = 5),
-  [166] = {.count = 1, .reusable = true}, REDUCE(sym__param_tag, 4),
-  [168] = {.count = 1, .reusable = false}, REDUCE(sym__param_tag, 4),
+  [166] = {.count = 1, .reusable = true}, REDUCE(sym__variable_tag_with_type, 4),
+  [168] = {.count = 1, .reusable = false}, REDUCE(sym__variable_tag_with_type, 4),
   [170] = {.count = 1, .reusable = true}, REDUCE(sym__method_tag, 5, .production_id = 4),
   [172] = {.count = 1, .reusable = false}, REDUCE(sym__method_tag, 5, .production_id = 4),
   [174] = {.count = 1, .reusable = true}, REDUCE(sym__method_tag, 5, .production_id = 2),

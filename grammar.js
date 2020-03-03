@@ -37,7 +37,7 @@ module.exports = grammar({
       $._internal_tag,
       $._link_tag,
       $._method_tag,
-      $._param_tag,
+      $._variable_tag_with_type,
     ),
 
     _author_tag: $ => seq(
@@ -91,8 +91,13 @@ module.exports = grammar({
       ')'
     ),
 
-    _param_tag: $ => seq(
-      alias('@param', $.tag_name),
+    _variable_tag_with_type: $ => seq(
+      alias(choice(
+        '@param',
+        '@property',
+        '@property-read',
+        '@property-write',
+      ), $.tag_name),
       $._type_name,
       $.variable_name,
       optional($.description),
@@ -173,9 +178,6 @@ function phpdoc_tags() {
     'ignore',
     'license',
     'package',
-    'property',
-    'property-read',
-    'property-write',
     'return',
     'see',
     'since',

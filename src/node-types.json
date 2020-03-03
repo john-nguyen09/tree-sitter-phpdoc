@@ -225,18 +225,6 @@
     "named": false
   },
   {
-    "type": "@property",
-    "named": false
-  },
-  {
-    "type": "@property-read",
-    "named": false
-  },
-  {
-    "type": "@property-write",
-    "named": false
-  },
-  {
     "type": "@return",
     "named": false
   },

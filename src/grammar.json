@@ -103,7 +103,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_param_tag"
+          "name": "_variable_tag_with_type"
         }
       ]
     },
@@ -399,14 +399,31 @@
         }
       ]
     },
-    "_param_tag": {
+    "_variable_tag_with_type": {
       "type": "SEQ",
       "members": [
         {
           "type": "ALIAS",
           "content": {
-            "type": "STRING",
-            "value": "@param"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "@param"
+              },
+              {
+                "type": "STRING",
+                "value": "@property"
+              },
+              {
+                "type": "STRING",
+                "value": "@property-read"
+              },
+              {
+                "type": "STRING",
+                "value": "@property-write"
+              }
+            ]
           },
           "named": true,
           "value": "tag_name"
@@ -475,18 +492,6 @@
         {
           "type": "STRING",
           "value": "@package"
-        },
-        {
-          "type": "STRING",
-          "value": "@property"
-        },
-        {
-          "type": "STRING",
-          "value": "@property-read"
-        },
-        {
-          "type": "STRING",
-          "value": "@property-write"
         },
         {
           "type": "STRING",
