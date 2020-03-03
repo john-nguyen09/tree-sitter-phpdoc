@@ -285,8 +285,16 @@
           "name": "uri"
         },
         {
-          "type": "SYMBOL",
-          "name": "description"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "description"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -307,13 +315,21 @@
           "name": "uri"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "text"
-          },
-          "named": true,
-          "value": "description"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "text"
+              },
+              "named": true,
+              "value": "description"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -433,10 +449,6 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "text"
-        },
-        {
           "type": "REPEAT",
           "content": {
             "type": "CHOICE",
@@ -486,8 +498,17 @@
           "value": "{"
         },
         {
-          "type": "SYMBOL",
-          "name": "_internal_inline_tag"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_internal_inline_tag"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_link_inline_tag"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -500,11 +521,8 @@
       "value": "[\\.0-9]+"
     },
     "uri": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "\\w+:(\\/?\\/?)[^\\s]+"
-      }
+      "type": "PATTERN",
+      "value": "\\w+:(\\/?\\/?)[^\\s}]+"
     },
     "identifier": {
       "type": "PATTERN",

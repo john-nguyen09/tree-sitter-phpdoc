@@ -67,13 +67,13 @@ module.exports = grammar({
     _link_tag: $ => seq(
       alias('@link', $.tag_name),
       $.uri,
-      $.description
+      optional($.description)
     ),
 
     _link_inline_tag: $ => seq(
       alias('@link', $.tag_name),
       $.uri,
-      alias($.text, $.description)
+      optional(alias($.text, $.description))
     ),
 
     author_name: $ => /[a-zA-Zα-ωΑ-Ωµ0-9_][ a-zA-Zα-ωΑ-Ωµ0-9_]*/,
@@ -85,7 +85,6 @@ module.exports = grammar({
     description: $ => repeat1($.text_line),
 
     text_line: $ => seq(
-      $.text,
       repeat(choice($.text, $.inline_tag)),
       choice('\n', '\r\n')
     ),
@@ -94,14 +93,16 @@ module.exports = grammar({
 
     inline_tag: $ => seq(
       '{',
-      $._internal_inline_tag,
-      // $._link_inline_tag,
+      choice(
+        $._internal_inline_tag,
+        $._link_inline_tag
+      ),
       '}'
     ),
 
     version: $ => /[\.0-9]+/,
 
-    uri: $ => token(/\w+:(\/?\/?)[^\s]+/),
+    uri: $ => /\w+:(\/?\/?)[^\s}]+/,
   
     identifier: $ => /[a-zA-Z_$\\][a-zA-Z_$\\0-9]*/,
   
