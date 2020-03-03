@@ -57,6 +57,25 @@
     }
   },
   {
+    "type": "param",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "variable_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "tag",
     "named": true,
     "fields": {},
@@ -77,6 +96,18 @@
           "named": true
         },
         {
+          "type": "name",
+          "named": true
+        },
+        {
+          "type": "param",
+          "named": true
+        },
+        {
+          "type": "static",
+          "named": true
+        },
+        {
           "type": "tag_name",
           "named": true
         },
@@ -86,6 +117,10 @@
         },
         {
           "type": "uri",
+          "named": true
+        },
+        {
+          "type": "variable_name",
           "named": true
         },
         {
@@ -106,7 +141,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "inline_tag",
@@ -120,11 +155,33 @@
     }
   },
   {
+    "type": "type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "variable_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "\n",
     "named": false
   },
   {
     "type": "\r\n",
+    "named": false
+  },
+  {
+    "type": "$",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
     "named": false
   },
   {
@@ -161,10 +218,6 @@
   },
   {
     "type": "@license",
-    "named": false
-  },
-  {
-    "type": "@method",
     "named": false
   },
   {
@@ -228,6 +281,10 @@
     "named": false
   },
   {
+    "type": "\\",
+    "named": false
+  },
+  {
     "type": "author_name",
     "named": true
   },
@@ -236,11 +293,15 @@
     "named": true
   },
   {
-    "type": "text",
+    "type": "name",
     "named": true
   },
   {
-    "type": "type",
+    "type": "static",
+    "named": true
+  },
+  {
+    "type": "text",
     "named": true
   },
   {

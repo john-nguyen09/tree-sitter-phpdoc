@@ -11,6 +11,13 @@ module.exports = grammar({
     token(repeat1(' ')),
   ],
 
+  word: $ => $._name,
+
+  conflicts: $ => [
+    [$._namespace_name],
+    [$._namespace_name_as_prefix],
+  ],
+
   rules: {
     document: $ => seq(
       $._begin,
@@ -33,6 +40,8 @@ module.exports = grammar({
       $._internal_tag,
 
       $._link_tag,
+
+      $._method_tag,
     ),
 
     _author_tag: $ => seq(
@@ -50,8 +59,8 @@ module.exports = grammar({
 
     _global_tag: $ => seq(
       alias('@global', $.tag_name),
-      alias($.identifier, $.type),
-      $.description,
+      $._type_name,
+      $.variable_name
     ),
 
     _internal_tag: $ => seq(
@@ -76,6 +85,16 @@ module.exports = grammar({
       optional(alias($.text, $.description))
     ),
 
+    _method_tag: $ => seq(
+      alias('@method', $.tag_name),
+      optional($.static),
+      optional($._type_name),
+      alias($._name, $.name),
+      '(',
+      repeat($.param),
+      ')'
+    ),
+
     author_name: $ => /[a-zA-Zα-ωΑ-Ωµ0-9_][ a-zA-Zα-ωΑ-Ωµ0-9_]*/,
 
     email_address: $ => /\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+/,
@@ -85,26 +104,49 @@ module.exports = grammar({
     description: $ => repeat1($.text_line),
 
     text_line: $ => seq(
-      repeat(choice($.text, $.inline_tag)),
+      repeat1(choice($.text, $.inline_tag)),
       choice('\n', '\r\n')
     ),
 
     text: $ => token(prec(-1, /[^@*\s\r\n{}][^\r\n{}]*/)),
 
-    inline_tag: $ => seq(
+    inline_tag: $ => prec(-1, seq(
       '{',
       choice(
         $._internal_inline_tag,
         $._link_inline_tag
       ),
       '}'
-    ),
+    )),
 
     version: $ => /[\.0-9]+/,
 
     uri: $ => /\w+:(\/?\/?)[^\s}]+/,
-  
-    identifier: $ => /[a-zA-Z_$\\][a-zA-Z_$\\0-9]*/,
+
+    _name: $ => /[_a-zA-Z\u00A1-\u00ff][_a-zA-Z\u00A1-\u00ff\d]*/,
+
+    _type_name: $ => alias($.qualified_name, $.type),
+
+    param: $ => seq(
+      optional($._type_name),
+      $.variable_name
+    ),
+
+    qualified_name: $ => seq(
+      optional($._namespace_name_as_prefix),
+      $._name
+    ),
+    
+    _namespace_name: $ => seq($._name, repeat(seq('\\', $._name))),
+
+    _namespace_name_as_prefix: $ => choice(
+      '\\',
+      seq(optional('\\'), $._namespace_name, '\\'),
+    ),
+
+    static: $ => 'static',
+
+    variable_name: $ => seq('$', $._name),
   
     _end: $ => '*/',
   },
@@ -123,7 +165,6 @@ function phpdoc_tags() {
     'filesource',
     'ignore',
     'license',
-    'method',
     'package',
     'param',
     'property',
