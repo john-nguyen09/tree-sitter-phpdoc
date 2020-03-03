@@ -225,10 +225,6 @@
     "named": false
   },
   {
-    "type": "@param",
-    "named": false
-  },
-  {
     "type": "@property",
     "named": false
   },
@@ -281,6 +277,10 @@
     "named": false
   },
   {
+    "type": "[]",
+    "named": false
+  },
+  {
     "type": "\\",
     "named": false
   },
@@ -314,6 +314,10 @@
   },
   {
     "type": "{",
+    "named": false
+  },
+  {
+    "type": "|",
     "named": false
   },
   {

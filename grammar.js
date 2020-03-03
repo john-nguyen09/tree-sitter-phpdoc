@@ -32,16 +32,12 @@ module.exports = grammar({
       seq($.tag_name, optional($.description)),
 
       $._author_tag,
-
       $._deprecated_tag,
-
       $._global_tag,
-
       $._internal_tag,
-
       $._link_tag,
-
       $._method_tag,
+      $._param_tag,
     ),
 
     _author_tag: $ => seq(
@@ -95,6 +91,13 @@ module.exports = grammar({
       ')'
     ),
 
+    _param_tag: $ => seq(
+      alias('@param', $.tag_name),
+      $._type_name,
+      $.variable_name,
+      optional($.description),
+    ),
+
     author_name: $ => /[a-zA-Zα-ωΑ-Ωµ0-9_][ a-zA-Zα-ωΑ-Ωµ0-9_]*/,
 
     email_address: $ => /\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+/,
@@ -125,7 +128,10 @@ module.exports = grammar({
 
     _name: $ => /[_a-zA-Z\u00A1-\u00ff][_a-zA-Z\u00A1-\u00ff\d]*/,
 
-    _type_name: $ => alias($.qualified_name, $.type),
+    _type_name: $ => seq(
+      alias($.qualified_name, $.type),
+      repeat(seq('|', alias($.qualified_name, $.type)))
+    ),
 
     param: $ => seq(
       optional($._type_name),
@@ -134,7 +140,8 @@ module.exports = grammar({
 
     qualified_name: $ => seq(
       optional($._namespace_name_as_prefix),
-      $._name
+      $._name,
+      optional('[]')
     ),
     
     _namespace_name: $ => seq($._name, repeat(seq('\\', $._name))),
@@ -166,7 +173,6 @@ function phpdoc_tags() {
     'ignore',
     'license',
     'package',
-    'param',
     'property',
     'property-read',
     'property-write',

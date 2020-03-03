@@ -100,6 +100,10 @@
         {
           "type": "SYMBOL",
           "name": "_method_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_param_tag"
         }
       ]
     },
@@ -395,6 +399,40 @@
         }
       ]
     },
+    "_param_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": "@param"
+          },
+          "named": true,
+          "value": "tag_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_type_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "variable_name"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "description"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "author_name": {
       "type": "PATTERN",
       "value": "[a-zA-Zα-ωΑ-Ωµ0-9_][ a-zA-Zα-ωΑ-Ωµ0-9_]*"
@@ -437,10 +475,6 @@
         {
           "type": "STRING",
           "value": "@package"
-        },
-        {
-          "type": "STRING",
-          "value": "@param"
         },
         {
           "type": "STRING",
@@ -591,13 +625,39 @@
       "value": "[_a-zA-Z\\u00A1-\\u00ff][_a-zA-Z\\u00A1-\\u00ff\\d]*"
     },
     "_type_name": {
-      "type": "ALIAS",
-      "content": {
-        "type": "SYMBOL",
-        "name": "qualified_name"
-      },
-      "named": true,
-      "value": "type"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "qualified_name"
+          },
+          "named": true,
+          "value": "type"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "|"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "qualified_name"
+                },
+                "named": true,
+                "value": "type"
+              }
+            ]
+          }
+        }
+      ]
     },
     "param": {
       "type": "SEQ",
@@ -638,6 +698,18 @@
         {
           "type": "SYMBOL",
           "name": "_name"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "[]"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
