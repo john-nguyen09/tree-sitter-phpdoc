@@ -99,7 +99,8 @@ module.exports = grammar({
       alias($._name, $.name),
       '(',
       repeat($.param),
-      ')'
+      ')',
+      optional($.description),
     ),
 
     _variable_tag_with_type: $ => seq(
