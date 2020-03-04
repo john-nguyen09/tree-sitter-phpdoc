@@ -98,7 +98,7 @@ module.exports = grammar({
       optional($._type_name),
       alias($._name, $.name),
       '(',
-      repeat($.param),
+      commaSep($.param),
       ')',
       optional($.description),
     ),
@@ -184,8 +184,14 @@ module.exports = grammar({
 
     param: $ => seq(
       optional($._type_name),
-      $.variable_name
+      $.variable_name,
+      optional(seq(
+        '=',
+        $.param_value,
+      )),
     ),
+
+    param_value: $ => /[^, ][^,]*/,
 
     qualified_name: $ => seq(
       optional($._namespace_name_as_prefix),
@@ -224,4 +230,8 @@ function phpdoc_tags() {
     'uses',
     'version',
   ];
+}
+
+function commaSep(rule) {
+  return optional(seq(rule, repeat(seq(',', rule))));
 }

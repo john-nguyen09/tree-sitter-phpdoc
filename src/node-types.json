@@ -65,6 +65,10 @@
       "required": true,
       "types": [
         {
+          "type": "param_value",
+          "named": true
+        },
+        {
           "type": "type",
           "named": true
         },
@@ -185,7 +189,15 @@
     "named": false
   },
   {
+    "type": ",",
+    "named": false
+  },
+  {
     "type": "<",
+    "named": false
+  },
+  {
+    "type": "=",
     "named": false
   },
   {
@@ -262,6 +274,10 @@
   },
   {
     "type": "name",
+    "named": true
+  },
+  {
+    "type": "param_value",
     "named": true
   },
   {
