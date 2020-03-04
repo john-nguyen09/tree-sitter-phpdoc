@@ -46,6 +46,10 @@
           "named": true
         },
         {
+          "type": "qualified_name",
+          "named": true
+        },
+        {
           "type": "tag_name",
           "named": true
         },
@@ -80,6 +84,11 @@
     }
   },
   {
+    "type": "qualified_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "tag",
     "named": true,
     "fields": {},
@@ -105,6 +114,10 @@
         },
         {
           "type": "param",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
           "named": true
         },
         {
@@ -182,6 +195,10 @@
   },
   {
     "type": "(",
+    "named": false
+  },
+  {
+    "type": "()",
     "named": false
   },
   {

@@ -13,11 +13,6 @@ module.exports = grammar({
 
   word: $ => $._name,
 
-  conflicts: $ => [
-    [$._namespace_name],
-    [$._namespace_name_as_prefix],
-  ],
-
   rules: {
     document: $ => seq(
       $._begin,
@@ -82,13 +77,21 @@ module.exports = grammar({
 
     _link_tag: $ => seq(
       alias('@link', $.tag_name),
-      $.uri,
+      choice(
+        $.uri,
+        $.qualified_name,
+        seq($.qualified_name, '()'),
+      ),
       optional($.description)
     ),
 
     _link_inline_tag: $ => seq(
       alias('@link', $.tag_name),
-      $.uri,
+      choice(
+        $.uri,
+        $.qualified_name,
+        seq($.qualified_name, '()'),
+      ),
       optional(alias($.text, $.description))
     ),
 
@@ -98,7 +101,7 @@ module.exports = grammar({
       optional($._type_name),
       alias($._name, $.name),
       '(',
-      commaSep($.param),
+      sep($.param, ','),
       ')',
       optional($.description),
     ),
@@ -175,7 +178,7 @@ module.exports = grammar({
 
     uri: $ => /\w+:(\/?\/?)[^\s}]+/,
 
-    _name: $ => /[_a-zA-Z\u00A1-\u00ff][_a-zA-Z\u00A1-\u00ff\d]*/,
+    _name: $ => /[_a-zA-Z\u00A1-\u00ff\$][_a-zA-Z\u00A1-\u00ff\$\d]*/,
 
     _type_name: $ => seq(
       alias($.qualified_name, $.type),
@@ -194,17 +197,11 @@ module.exports = grammar({
     param_value: $ => /[^, ][^,]*/,
 
     qualified_name: $ => seq(
-      optional($._namespace_name_as_prefix),
-      $._name,
-      optional('[]')
+      $._namespace_name,
+      repeat('[]')
     ),
 
-    _namespace_name: $ => seq($._name, repeat(seq('\\', $._name))),
-
-    _namespace_name_as_prefix: $ => choice(
-      '\\',
-      seq(optional('\\'), $._namespace_name, '\\'),
-    ),
+    _namespace_name: $ => seq(repeat('\\'), sep1($._name, '\\')),
 
     static: $ => 'static',
 
@@ -232,6 +229,10 @@ function phpdoc_tags() {
   ];
 }
 
-function commaSep(rule) {
-  return optional(seq(rule, repeat(seq(',', rule))));
+function sep1(rule, sep) {
+  return seq(rule, repeat(seq(sep, rule)));
+}
+
+function sep(rule, sep) {
+  return optional(sep1(rule, sep));
 }
