@@ -14,6 +14,8 @@ module.exports = grammar({
   word: $ => $._name,
 
   rules: {
+    program: $ => repeat1($.document),
+
     document: $ => seq(
       $._begin,
       optional($.description),

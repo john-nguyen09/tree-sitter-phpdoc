@@ -84,6 +84,21 @@
     }
   },
   {
+    "type": "program",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "document",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "qualified_name",
     "named": true,
     "fields": {}

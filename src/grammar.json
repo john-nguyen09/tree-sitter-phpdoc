@@ -2,6 +2,13 @@
   "name": "phpdoc",
   "word": "_name",
   "rules": {
+    "program": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "document"
+      }
+    },
     "document": {
       "type": "SEQ",
       "members": [
