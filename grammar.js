@@ -196,7 +196,7 @@ module.exports = grammar({
       )),
     ),
 
-    param_value: $ => /[^, ][^,]*/,
+    param_value: $ => /[^, ][^,)]*/,
 
     qualified_name: $ => seq(
       $._namespace_name,

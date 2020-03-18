@@ -2019,6 +2019,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\n') ADVANCE(237);
       if (lookahead == '\r') ADVANCE(237);
       if (lookahead == ' ') ADVANCE(237);
+      if (lookahead == ')') ADVANCE(238);
       if (lookahead == '*') ADVANCE(237);
       if (lookahead != 0 &&
           lookahead != ',') ADVANCE(238);
@@ -2026,6 +2027,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 238:
       ACCEPT_TOKEN(sym_param_value);
       if (lookahead != 0 &&
+          lookahead != ')' &&
           lookahead != ',') ADVANCE(238);
       END_STATE();
     case 239:

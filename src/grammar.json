@@ -965,7 +965,7 @@
     },
     "param_value": {
       "type": "PATTERN",
-      "value": "[^, ][^,]*"
+      "value": "[^, ][^,)]*"
     },
     "qualified_name": {
       "type": "SEQ",
