@@ -8,7 +8,11 @@
       "required": false,
       "types": [
         {
-          "type": "text_line",
+          "type": "inline_tag",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         }
       ]
@@ -168,25 +172,6 @@
     "fields": {}
   },
   {
-    "type": "text_line",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "inline_tag",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "type",
     "named": true,
     "fields": {}
@@ -195,14 +180,6 @@
     "type": "variable_name",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "\n",
-    "named": false
-  },
-  {
-    "type": "\r\n",
-    "named": false
   },
   {
     "type": "$",

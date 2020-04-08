@@ -789,13 +789,6 @@
       ]
     },
     "description": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "SYMBOL",
-        "name": "text_line"
-      }
-    },
-    "text_line": {
       "type": "SEQ",
       "members": [
         {
@@ -813,19 +806,6 @@
               }
             ]
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "\n"
-            },
-            {
-              "type": "STRING",
-              "value": "\r\n"
-            }
-          ]
         }
       ]
     },

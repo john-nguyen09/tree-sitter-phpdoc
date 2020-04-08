@@ -157,11 +157,8 @@ module.exports = grammar({
   
     tag_name: $ => choice(...phpdoc_tags().map(tag => `@${tag}`)),
   
-    description: $ => repeat1($.text_line),
-
-    text_line: $ => seq(
+    description: $ => seq(
       repeat1(choice($.text, $.inline_tag)),
-      choice('\n', '\r\n')
     ),
 
     text: $ => token(prec(-1, /[^@*\s\r\n{}][^\r\n{}]*/)),
