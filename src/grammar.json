@@ -816,7 +816,7 @@
         "value": -1,
         "content": {
           "type": "PATTERN",
-          "value": "[^@*\\s\\r\\n{}][^\\r\\n{}]*"
+          "value": "[^@*\\s\\n{}][^\\n{}*]*"
         }
       }
     },

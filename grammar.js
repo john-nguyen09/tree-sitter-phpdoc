@@ -161,7 +161,7 @@ module.exports = grammar({
       repeat1(choice($.text, $.inline_tag)),
     ),
 
-    text: $ => token(prec(-1, /[^@*\s\r\n{}][^\r\n{}]*/)),
+    text: $ => token(prec(-1, /[^@*\s\n{}][^\n{}*]*/)),
 
     inline_tag: $ => prec(-1, seq(
       '{',
